@@ -25,5 +25,8 @@
     "dev:optimization": "npm run dev -w @tsenturion-vue/optimization",
     "build": "npm run build --workspaces --if-present",
     "preview": "npm run preview --workspaces --if-present"
+  },
+  "devDependencies": {
+    "npm-check-updates": "^21.0.2"
   }
 }
