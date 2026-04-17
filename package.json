@@ -1,0 +1,29 @@
+{
+  "name": "@tsenturion-vue/examples",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "async",
+    "virtual-dom",
+    "template-ref",
+    "slots",
+    "provide-inject",
+    "pinia",
+    "router",
+    "optimization"
+  ],
+  "scripts": {
+    "dev:async": "npm run dev -w @tsenturion-vue/async",
+    "dev:virtual-dom": "npm run dev -w @tsenturion-vue/virtual-dom",
+    "dev:template-ref": "npm run dev -w @tsenturion-vue/template-ref",
+    "dev:slots": "npm run dev -w @tsenturion-vue/slots",
+    "dev:provide-inject": "npm run dev -w @tsenturion-vue/provide-inject",
+    "dev:pinia": "npm run dev -w @tsenturion-vue/pinia",
+    "dev:router": "npm run dev -w @tsenturion-vue/router",
+    "dev:optimization": "npm run dev -w @tsenturion-vue/optimization",
+    "build": "npm run build --workspaces --if-present",
+    "preview": "npm run preview --workspaces --if-present"
+  }
+}

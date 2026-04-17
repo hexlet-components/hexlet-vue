@@ -1,0 +1,13 @@
+node_modules
+npm-debug.log
+dist
+.env
+.DS_Store
+.git
+.gitignore
+.vscode
+.idea
+*.md
+
+# theory must not be sent to docker build context
+theory.md
