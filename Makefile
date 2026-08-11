@@ -5,3 +5,7 @@ install:
 
 build:
 	pnpm run build
+
+lint:
+	pnpm --silent run lint
+	pnpm --silent run format:check
