@@ -1,7 +1,7 @@
 <script setup>
 defineProps({
-  items: { type: Array, default: () => [] }
-})
+  items: { type: Array, default: () => [] },
+});
 </script>
 
 <template>
@@ -15,12 +15,7 @@ defineProps({
     <div class="p-4">
       <template v-if="items.length">
         <div class="space-y-3">
-          <slot
-            name="item"
-            v-for="it in items"
-            :key="it.id ?? JSON.stringify(it)"
-            :item="it"
-          >
+          <slot name="item" v-for="it in items" :key="it.id ?? JSON.stringify(it)" :item="it">
             <div class="p-3 border rounded bg-white">
               {{ it }}
             </div>
@@ -30,9 +25,7 @@ defineProps({
 
       <template v-else>
         <slot name="empty">
-          <div class="p-4 border rounded bg-white text-gray-600 text-center">
-            Пусто
-          </div>
+          <div class="p-4 border rounded bg-white text-gray-600 text-center">Пусто</div>
         </slot>
       </template>
     </div>

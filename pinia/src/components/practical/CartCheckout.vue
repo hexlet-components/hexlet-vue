@@ -1,9 +1,9 @@
 <script setup>
-import { storeToRefs } from 'pinia'
-import { useCartStore } from '@/stores/cart'
+import { storeToRefs } from "pinia";
+import { useCartStore } from "@/stores/cart";
 
-const cartStore = useCartStore()
-const { cartLines, totalItems, totalPrice, hasItems } = storeToRefs(cartStore)
+const cartStore = useCartStore();
+const { cartLines, totalItems, totalPrice, hasItems } = storeToRefs(cartStore);
 </script>
 
 <template>

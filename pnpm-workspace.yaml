@@ -1,0 +1,12 @@
+# Репозиторий это монорепозиторий: восемь примеров, каждый со своим
+# package.json. Поле "workspaces" в package.json pnpm не читает, состав
+# описывается здесь, иначе пакеты не связываются между собой.
+packages:
+  - async
+  - virtual-dom
+  - template-ref
+  - slots
+  - provide-inject
+  - pinia
+  - router
+  - optimization

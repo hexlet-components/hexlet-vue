@@ -1,21 +1,21 @@
 <script setup>
-import { computed, ref } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useAuthStore } from '@/stores/auth'
+import { computed, ref } from "vue";
+import { storeToRefs } from "pinia";
+import { useAuthStore } from "@/stores/auth";
 
-const authStore = useAuthStore()
-const { user, token, isAuthenticated, roleLabel } = storeToRefs(authStore)
+const authStore = useAuthStore();
+const { user, token, isAuthenticated, roleLabel } = storeToRefs(authStore);
 
-const formName = ref('Иван')
-const formRole = ref('editor')
+const formName = ref("Иван");
+const formRole = ref("editor");
 
 const tokenPreview = computed(() => {
-  if (!token.value) return 'нет токена'
-  return `${token.value.slice(0, 16)}...`
-})
+  if (!token.value) return "нет токена";
+  return `${token.value.slice(0, 16)}...`;
+});
 
 function signIn() {
-  authStore.loginAsDemo(formName.value || 'Иван', formRole.value)
+  authStore.loginAsDemo(formName.value || "Иван", formRole.value);
 }
 </script>
 
@@ -34,7 +34,7 @@ function signIn() {
               v-model="formName"
               type="text"
               class="mt-2 w-full rounded-lg border border-slate-300 px-3 py-2"
-            >
+            />
           </label>
 
           <label class="block text-sm text-slate-600">
@@ -85,7 +85,8 @@ function signIn() {
           </div>
         </div>
 
-        <pre class="mt-4 overflow-x-auto rounded-lg bg-slate-900 p-3 text-xs text-slate-100">export const useAuthStore = defineStore('auth', () => {
+        <pre class="mt-4 overflow-x-auto rounded-lg bg-slate-900 p-3 text-xs text-slate-100">
+export const useAuthStore = defineStore('auth', () => {
   const user = ref(null)
   const isAuthenticated = computed(() => !!user.value)
   function login() { ... }

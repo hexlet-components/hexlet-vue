@@ -8,7 +8,8 @@
         <p class="mb-3 text-sm text-slate-600">
           Каждый маршрут связывает URL с компонентом страницы.
         </p>
-        <pre class="overflow-x-auto rounded-lg bg-slate-900 p-3 text-xs text-slate-100">const routes = [
+        <pre class="overflow-x-auto rounded-lg bg-slate-900 p-3 text-xs text-slate-100">
+const routes = [
   { path: '/', component: HomePage },
   { path: '/basic', component: BasicRoutesPage },
   { path: '/users/:id', component: DynamicUserPage }
@@ -20,7 +21,8 @@
         <p class="mb-3 text-sm text-slate-600">
           В корневом компоненте нужен `router-view`, куда Vue Router подставляет текущую страницу.
         </p>
-        <pre class="overflow-x-auto rounded-lg bg-slate-900 p-3 text-xs text-slate-100">&lt;template&gt;
+        <pre class="overflow-x-auto rounded-lg bg-slate-900 p-3 text-xs text-slate-100">
+&lt;template&gt;
   &lt;header&gt;...общая шапка...&lt;/header&gt;
   &lt;router-view /&gt;
 &lt;/template&gt;</pre>

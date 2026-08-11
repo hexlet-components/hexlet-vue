@@ -1,27 +1,27 @@
 <script setup>
-import { ref, shallowRef } from 'vue'
-import VNodesDemo from './components/VNodesDemo.vue'
-import DiffingDemo from './components/DiffingDemo.vue'
-import OptimizationDemo from './components/OptimizationDemo.vue'
-import PerformanceDemo from './components/PerformanceDemo.vue'
+import { ref, shallowRef } from "vue";
+import VNodesDemo from "./components/VNodesDemo.vue";
+import DiffingDemo from "./components/DiffingDemo.vue";
+import OptimizationDemo from "./components/OptimizationDemo.vue";
+import PerformanceDemo from "./components/PerformanceDemo.vue";
 
 const tabs = [
-  { id: 1, name: 'Виртуальные узлы', component: VNodesDemo },
-  { id: 2, name: 'Сравнение деревьев', component: DiffingDemo },
-  { id: 3, name: 'Оптимизация', component: OptimizationDemo },
-  { id: 4, name: 'Производительность', component: PerformanceDemo }
-]
+  { id: 1, name: "Виртуальные узлы", component: VNodesDemo },
+  { id: 2, name: "Сравнение деревьев", component: DiffingDemo },
+  { id: 3, name: "Оптимизация", component: OptimizationDemo },
+  { id: 4, name: "Производительность", component: PerformanceDemo },
+];
 
-const activeTab = ref(1)
-const activeComponent = shallowRef(VNodesDemo)
+const activeTab = ref(1);
+const activeComponent = shallowRef(VNodesDemo);
 
 const switchTab = (tabId) => {
-  activeTab.value = tabId
-  const tab = tabs.find(t => t.id === tabId)
+  activeTab.value = tabId;
+  const tab = tabs.find((t) => t.id === tabId);
   if (tab) {
-    activeComponent.value = tab.component
+    activeComponent.value = tab.component;
   }
-}
+};
 </script>
 
 <template>
@@ -29,9 +29,7 @@ const switchTab = (tabId) => {
     <div class="container mx-auto px-4 py-8 max-w-7xl">
       <!-- Заголовок -->
       <header class="mb-10 text-center">
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">
-          Virtual DOM в Vue
-        </h1>
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">Virtual DOM в Vue</h1>
         <p class="text-lg text-gray-600 max-w-3xl mx-auto">
           Интерактивная демонстрация виртуального DOM, алгоритмов сравнения и оптимизации рендеринга
         </p>
@@ -48,7 +46,7 @@ const switchTab = (tabId) => {
             :class="[
               activeTab === tab.id
                 ? 'bg-blue-600 text-white shadow-md'
-                : 'text-gray-600 hover:bg-gray-100'
+                : 'text-gray-600 hover:bg-gray-100',
             ]"
           >
             {{ tab.name }}
@@ -65,9 +63,7 @@ const switchTab = (tabId) => {
       <footer class="mt-12 pt-8 border-t border-gray-200">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
-            <h3 class="text-xl font-semibold text-gray-800 mb-4">
-              Что должно работать:
-            </h3>
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Что должно работать:</h3>
             <div class="space-y-2">
               <div class="flex items-center">
                 <span class="inline-block w-3 h-3 bg-green-500 rounded-full mr-3"></span>
@@ -88,16 +84,20 @@ const switchTab = (tabId) => {
             </div>
           </div>
           <div>
-            <h3 class="text-xl font-semibold text-gray-800 mb-4">
-              Если не работает:
-            </h3>
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Если не работает:</h3>
             <div class="p-3 bg-red-50 rounded-lg">
               <p class="text-red-800 font-medium">Попробуйте:</p>
               <ol class="list-decimal list-inside text-red-600 text-sm mt-2 space-y-1">
                 <li>Остановить сервер (Ctrl+C)</li>
                 <li>Удалить node_modules и package-lock.json</li>
-                <li>Запустить: <code class="bg-gray-800 text-white px-2 py-1 rounded">npm install</code></li>
-                <li>Запустить: <code class="bg-gray-800 text-white px-2 py-1 rounded">npm run dev</code></li>
+                <li>
+                  Запустить:
+                  <code class="bg-gray-800 text-white px-2 py-1 rounded">npm install</code>
+                </li>
+                <li>
+                  Запустить:
+                  <code class="bg-gray-800 text-white px-2 py-1 rounded">npm run dev</code>
+                </li>
               </ol>
             </div>
           </div>

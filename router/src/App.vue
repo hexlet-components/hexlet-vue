@@ -1,30 +1,31 @@
 <script setup>
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed } from "vue";
+import { useRoute } from "vue-router";
 
-const route = useRoute()
+const route = useRoute();
 
 const links = [
-  { to: '/', label: 'Введение' },
-  { to: '/basic', label: 'Базовые маршруты' },
-  { to: '/users/1', label: 'Динамические :id' },
-  { to: '/catalog', label: 'Query-параметры' },
-  { to: '/actions', label: 'Программная навигация' }
-]
+  { to: "/", label: "Введение" },
+  { to: "/basic", label: "Базовые маршруты" },
+  { to: "/users/1", label: "Динамические :id" },
+  { to: "/catalog", label: "Query-параметры" },
+  { to: "/actions", label: "Программная навигация" },
+];
 
 function isActive(to) {
-  if (to.startsWith('/users')) return route.path.startsWith('/users')
-  if (to === '/catalog') return route.path.startsWith('/catalog')
-  if (to === '/actions') return route.path.startsWith('/actions') || route.path.startsWith('/success')
-  return route.path === to
+  if (to.startsWith("/users")) return route.path.startsWith("/users");
+  if (to === "/catalog") return route.path.startsWith("/catalog");
+  if (to === "/actions")
+    return route.path.startsWith("/actions") || route.path.startsWith("/success");
+  return route.path === to;
 }
 
 const routeInfo = computed(() => ({
   path: route.path,
-  name: route.name ?? 'n/a',
+  name: route.name ?? "n/a",
   params: JSON.stringify(route.params),
-  query: JSON.stringify(route.query)
-}))
+  query: JSON.stringify(route.query),
+}));
 </script>
 
 <template>

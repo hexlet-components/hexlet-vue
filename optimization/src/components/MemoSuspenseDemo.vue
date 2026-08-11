@@ -1,32 +1,32 @@
 <script setup>
-import { ref } from 'vue'
-import PerfMemberCard from './perf/PerfMemberCard.vue'
+import { ref } from "vue";
+import PerfMemberCard from "./perf/PerfMemberCard.vue";
 
-const uiPulse = ref(0)
+const uiPulse = ref(0);
 const members = ref([
-  { id: 1, name: 'Анна', score: 42 },
-  { id: 2, name: 'Борис', score: 37 },
-  { id: 3, name: 'Вера', score: 51 },
-  { id: 4, name: 'Глеб', score: 29 }
-])
+  { id: 1, name: "Анна", score: 42 },
+  { id: 2, name: "Борис", score: 37 },
+  { id: 3, name: "Вера", score: 51 },
+  { id: 4, name: "Глеб", score: 29 },
+]);
 
 function pulseUI() {
-  uiPulse.value += 1
+  uiPulse.value += 1;
 }
 
 function increaseScore(id) {
-  const member = members.value.find(item => item.id === id)
-  if (member) member.score += 1
+  const member = members.value.find((item) => item.id === id);
+  if (member) member.score += 1;
 }
 
 function resetScores() {
   members.value = [
-    { id: 1, name: 'Анна', score: 42 },
-    { id: 2, name: 'Борис', score: 37 },
-    { id: 3, name: 'Вера', score: 51 },
-    { id: 4, name: 'Глеб', score: 29 }
-  ]
-  uiPulse.value = 0
+    { id: 1, name: "Анна", score: 42 },
+    { id: 2, name: "Борис", score: 37 },
+    { id: 3, name: "Вера", score: 51 },
+    { id: 4, name: "Глеб", score: 29 },
+  ];
+  uiPulse.value = 0;
 }
 </script>
 
@@ -47,7 +47,9 @@ function resetScores() {
       >
         Сброс
       </button>
-      <span class="rounded-lg bg-lime-100 px-3 py-2 text-sm text-lime-800">uiPulse: {{ uiPulse }}</span>
+      <span class="rounded-lg bg-lime-100 px-3 py-2 text-sm text-lime-800"
+        >uiPulse: {{ uiPulse }}</span
+      >
     </div>
 
     <div class="mb-5 flex flex-wrap gap-2">

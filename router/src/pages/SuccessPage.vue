@@ -1,20 +1,18 @@
 <script setup>
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed } from "vue";
+import { useRoute } from "vue-router";
 
-const route = useRoute()
+const route = useRoute();
 
-const source = computed(() => route.query.from ?? 'unknown')
-const email = computed(() => route.query.email ?? '—')
-const role = computed(() => route.query.role ?? '—')
+const source = computed(() => route.query.from ?? "unknown");
+const email = computed(() => route.query.email ?? "—");
+const role = computed(() => route.query.role ?? "—");
 </script>
 
 <template>
   <div>
     <h2 class="mb-4 text-2xl font-bold text-slate-900">Страница успеха</h2>
-    <p class="mb-6 text-slate-600">
-      Это целевая страница для примера `router.push` из JS-кода.
-    </p>
+    <p class="mb-6 text-slate-600">Это целевая страница для примера `router.push` из JS-кода.</p>
 
     <div class="grid gap-4 md:grid-cols-3">
       <div class="rounded-lg bg-emerald-50 p-4 text-emerald-900">

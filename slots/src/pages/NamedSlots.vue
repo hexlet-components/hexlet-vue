@@ -1,10 +1,10 @@
 <script setup>
-import { ref } from 'vue'
-import ModalWindow from '../ui/ModalWindow.vue'
-import AppLayout from '../ui/AppLayout.vue'
-import TogglePanel from '../ui/TogglePanel.vue'
+import { ref } from "vue";
+import ModalWindow from "../ui/ModalWindow.vue";
+import AppLayout from "../ui/AppLayout.vue";
+import TogglePanel from "../ui/TogglePanel.vue";
 
-const showModal = ref(false)
+const showModal = ref(false);
 </script>
 
 <template>
@@ -19,7 +19,9 @@ const showModal = ref(false)
     <div class="space-y-8">
       <!-- Modal -->
       <section class="bg-gray-50 p-6 rounded-xl">
-        <h3 class="text-lg font-semibold text-gray-900 mb-3">1) Модальное окно: header / default / footer</h3>
+        <h3 class="text-lg font-semibold text-gray-900 mb-3">
+          1) Модальное окно: header / default / footer
+        </h3>
 
         <button
           class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
@@ -32,18 +34,23 @@ const showModal = ref(false)
           <template #header>
             <div class="flex items-center justify-between">
               <div class="font-semibold text-gray-900">Кастомный заголовок</div>
-              <button class="text-gray-500 hover:text-gray-800" @click="showModal = false">×</button>
+              <button class="text-gray-500 hover:text-gray-800" @click="showModal = false">
+                ×
+              </button>
             </div>
           </template>
 
-          <p class="text-gray-700">
-            Это содержимое передано через <strong>default</strong> slot.
-          </p>
+          <p class="text-gray-700">Это содержимое передано через <strong>default</strong> slot.</p>
 
           <template #footer>
             <div class="flex justify-end gap-2">
               <button class="px-4 py-2 border rounded-lg" @click="showModal = false">Отмена</button>
-              <button class="px-4 py-2 bg-blue-600 text-white rounded-lg" @click="showModal = false">ОК</button>
+              <button
+                class="px-4 py-2 bg-blue-600 text-white rounded-lg"
+                @click="showModal = false"
+              >
+                ОК
+              </button>
             </div>
           </template>
         </ModalWindow>
@@ -55,7 +62,9 @@ const showModal = ref(false)
 
       <!-- Layout -->
       <section class="bg-gray-50 p-6 rounded-xl">
-        <h3 class="text-lg font-semibold text-gray-900 mb-3">2) Layout: header / sidebar / content / footer</h3>
+        <h3 class="text-lg font-semibold text-gray-900 mb-3">
+          2) Layout: header / sidebar / content / footer
+        </h3>
 
         <AppLayout>
           <template #header>
@@ -69,7 +78,9 @@ const showModal = ref(false)
             <nav class="space-y-2">
               <button class="w-full text-left px-3 py-2 rounded hover:bg-gray-200">Главная</button>
               <button class="w-full text-left px-3 py-2 rounded hover:bg-gray-200">Проекты</button>
-              <button class="w-full text-left px-3 py-2 rounded hover:bg-gray-200">Настройки</button>
+              <button class="w-full text-left px-3 py-2 rounded hover:bg-gray-200">
+                Настройки
+              </button>
             </nav>
           </template>
 
@@ -90,17 +101,16 @@ const showModal = ref(false)
 
       <!-- TogglePanel -->
       <section class="bg-gray-50 p-6 rounded-xl">
-        <h3 class="text-lg font-semibold text-gray-900 mb-3">3) Контейнер с управляющей зоной: toggle + content</h3>
+        <h3 class="text-lg font-semibold text-gray-900 mb-3">
+          3) Контейнер с управляющей зоной: toggle + content
+        </h3>
 
         <TogglePanel>
           <template #toggle="{ open, toggle }">
             <div class="flex items-center justify-between">
               <div class="font-medium text-gray-800">Панель</div>
-              <button
-                class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
-                @click="toggle"
-              >
-                {{ open ? 'Скрыть' : 'Показать' }}
+              <button class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300" @click="toggle">
+                {{ open ? "Скрыть" : "Показать" }}
               </button>
             </div>
           </template>

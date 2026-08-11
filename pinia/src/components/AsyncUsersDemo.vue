@@ -1,9 +1,9 @@
 <script setup>
-import { storeToRefs } from 'pinia'
-import { useUsersStore } from '@/stores/users'
+import { storeToRefs } from "pinia";
+import { useUsersStore } from "@/stores/users";
 
-const usersStore = useUsersStore()
-const { users, loading, error, lastLoadedAt, activeCount } = storeToRefs(usersStore)
+const usersStore = useUsersStore();
+const { users, loading, error, lastLoadedAt, activeCount } = storeToRefs(usersStore);
 </script>
 
 <template>
@@ -11,8 +11,8 @@ const { users, loading, error, lastLoadedAt, activeCount } = storeToRefs(usersSt
     <h2 class="mb-6 text-2xl font-bold text-slate-900">Асинхронные actions</h2>
 
     <div class="mb-6 rounded-xl border border-cyan-200 bg-cyan-50 p-5 text-cyan-900">
-      Весь процесс загрузки (`loading`, `error`, данные) хранится в store и может использоваться
-      в любом компоненте.
+      Весь процесс загрузки (`loading`, `error`, данные) хранится в store и может использоваться в
+      любом компоненте.
     </div>
 
     <div class="mb-6 flex flex-wrap gap-2">
@@ -73,7 +73,7 @@ const { users, loading, error, lastLoadedAt, activeCount } = storeToRefs(usersSt
                 user.isActive ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'
               "
             >
-              {{ user.isActive ? 'active' : 'inactive' }}
+              {{ user.isActive ? "active" : "inactive" }}
             </span>
           </div>
           <p class="text-sm text-slate-600">{{ user.email }}</p>

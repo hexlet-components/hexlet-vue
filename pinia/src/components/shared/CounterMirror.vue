@@ -1,9 +1,9 @@
 <script setup>
-import { storeToRefs } from 'pinia'
-import { useCounterStore } from '@/stores/counter'
+import { storeToRefs } from "pinia";
+import { useCounterStore } from "@/stores/counter";
 
-const counter = useCounterStore()
-const { count, doubleCount, parity, history } = storeToRefs(counter)
+const counter = useCounterStore();
+const { count, doubleCount, parity, history } = storeToRefs(counter);
 </script>
 
 <template>

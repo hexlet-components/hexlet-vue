@@ -1,12 +1,12 @@
 <script setup>
-const loadedAt = new Date().toLocaleTimeString()
+const loadedAt = new Date().toLocaleTimeString();
 
 const rows = Array.from({ length: 8 }, (_, index) => ({
   id: index + 1,
   page: `/section/${index + 1}`,
   visits: 1800 + index * 247,
-  tti: 1.4 + index * 0.08
-}))
+  tti: 1.4 + index * 0.08,
+}));
 </script>
 
 <template>
