@@ -34,7 +34,7 @@ export const useUsersStore = defineStore('users', {
         }))
 
         this.lastLoadedAt = new Date().toLocaleTimeString()
-      } catch (_error) {
+      } catch {
         this.error = 'Не удалось загрузить пользователей. Проверьте соединение и попробуйте снова.'
       } finally {
         this.loading = false

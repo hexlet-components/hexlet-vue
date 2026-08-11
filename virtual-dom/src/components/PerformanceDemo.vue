@@ -4,13 +4,17 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 // Демонстрация производительности
 const heavyListSize = ref(100)
 const useKeys = ref(true)
-const renderTime = ref(0)
 const fps = ref(0)
 const frameCount = ref(0)
 const lastTime = ref(0)
 
-// Генерация тяжелого списка
-const heavyList = computed(() => {
+// Генерация тяжелого списка.
+//
+// Список и время его построения считаются одним computed, а наружу отдаются
+// двумя производными. Раньше computed писал в отдельный ref, и это давало
+// недостоверную цифру: computed кешируется и вычисляется лениво, поэтому ref
+// обновлялся не тогда, когда список действительно строился.
+const heavyListWithTiming = computed(() => {
   const start = performance.now()
   const list = Array.from({ length: heavyListSize.value }, (_, i) => ({
     id: useKeys.value ? `item-${i}` : i,
@@ -18,10 +22,12 @@ const heavyList = computed(() => {
     value: Math.random() * 1000,
     color: `hsl(${(i * 10) % 360}, 70%, 80%)`
   }))
-  
-  renderTime.value = performance.now() - start
-  return list
+
+  return { list, elapsed: performance.now() - start }
 })
+
+const heavyList = computed(() => heavyListWithTiming.value.list)
+const renderTime = computed(() => heavyListWithTiming.value.elapsed)
 
 // Операции со списком
 const shuffleList = () => {
