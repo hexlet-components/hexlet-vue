@@ -1,38 +1,38 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed } from "vue";
 
 // Данные для демонстрации
 const items = ref([
-  { id: 1, name: 'Яблоко', price: 50, quantity: 2 },
-  { id: 2, name: 'Банан', price: 30, quantity: 3 },
-  { id: 3, name: 'Апельсин', price: 70, quantity: 1 }
-])
+  { id: 1, name: "Яблоко", price: 50, quantity: 2 },
+  { id: 2, name: "Банан", price: 30, quantity: 3 },
+  { id: 3, name: "Апельсин", price: 70, quantity: 1 },
+]);
 
-const newItem = ref({ name: '', price: 0, quantity: 1 })
-const expensiveThreshold = ref(60)
+const newItem = ref({ name: "", price: 0, quantity: 1 });
+const expensiveThreshold = ref(60);
 
 // ПЛОХО: функция в шаблоне
 const calculateItemTotal = (item) => {
-  console.log('calculateItemTotal вызван для:', item.name)
-  return item.price * item.quantity
-}
+  console.log("calculateItemTotal вызван для:", item.name);
+  return item.price * item.quantity;
+};
 
 // ХОРОШО: computed свойство
 const totalWithComputed = computed(() => {
-  console.log('totalWithComputed пересчитан')
-  return items.value.reduce((sum, item) => sum + (item.price * item.quantity), 0)
-})
+  console.log("totalWithComputed пересчитан");
+  return items.value.reduce((sum, item) => sum + item.price * item.quantity, 0);
+});
 
 // Другие computed свойства
 const expensiveItems = computed(() => {
-  return items.value.filter(item => item.price > expensiveThreshold.value)
-})
+  return items.value.filter((item) => item.price > expensiveThreshold.value);
+});
 
 const averagePrice = computed(() => {
-  if (items.value.length === 0) return 0
-  const total = items.value.reduce((sum, item) => sum + item.price, 0)
-  return Math.round(total / items.value.length)
-})
+  if (items.value.length === 0) return 0;
+  const total = items.value.reduce((sum, item) => sum + item.price, 0);
+  return Math.round(total / items.value.length);
+});
 
 // Действия
 const addItem = () => {
@@ -41,55 +41,55 @@ const addItem = () => {
       id: Date.now(),
       name: newItem.value.name,
       price: newItem.value.price,
-      quantity: newItem.value.quantity
-    })
-    newItem.value = { name: '', price: 0, quantity: 1 }
+      quantity: newItem.value.quantity,
+    });
+    newItem.value = { name: "", price: 0, quantity: 1 };
   }
-}
+};
 
 const removeItem = (id) => {
-  items.value = items.value.filter(item => item.id !== id)
-}
+  items.value = items.value.filter((item) => item.id !== id);
+};
 
 // Демонстрация мемоизации
-const heavyCalculationCalls = ref(0)
-const memoizedResults = ref({})
+const heavyCalculationCalls = ref(0);
+const memoizedResults = ref({});
 
 const heavyCalculation = (n) => {
-  heavyCalculationCalls.value++
-  
+  heavyCalculationCalls.value++;
+
   // Проверяем кэш
   if (memoizedResults.value[n]) {
-    return memoizedResults.value[n]
+    return memoizedResults.value[n];
   }
-  
-  // Имитация тяжелых вычислений
-  let result = 0
-  for (let i = 0; i < n * 1000000; i++) {
-    result += Math.sin(i) * Math.cos(i)
-  }
-  
-  // Сохраняем в кэш
-  memoizedResults.value[n] = result
-  return result
-}
 
-const calculationInput = ref(5)
-const calculationResult = ref(0)
+  // Имитация тяжелых вычислений
+  let result = 0;
+  for (let i = 0; i < n * 1000000; i++) {
+    result += Math.sin(i) * Math.cos(i);
+  }
+
+  // Сохраняем в кэш
+  memoizedResults.value[n] = result;
+  return result;
+};
+
+const calculationInput = ref(5);
+const calculationResult = ref(0);
 
 const runCalculation = () => {
-  calculationResult.value = heavyCalculation(calculationInput.value)
-}
+  calculationResult.value = heavyCalculation(calculationInput.value);
+};
 </script>
 
 <template>
   <div>
     <h2 class="text-2xl font-bold text-gray-800 mb-6">Оптимизация рендеринга</h2>
-    
+
     <div class="mb-8">
       <p class="text-gray-600 mb-4">
-        Virtual DOM эффективен, но требует правильных подходов к организации кода.
-        Оптимизации позволяют минимизировать ненужные вычисления и перерисовки.
+        Virtual DOM эффективен, но требует правильных подходов к организации кода. Оптимизации
+        позволяют минимизировать ненужные вычисления и перерисовки.
       </p>
     </div>
 
@@ -121,7 +121,7 @@ const runCalculation = () => {
                   <span>100</span>
                 </div>
               </div>
-              
+
               <button
                 @click="addItem"
                 class="self-end px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
@@ -133,9 +133,7 @@ const runCalculation = () => {
             <!-- Форма добавления товара -->
             <div class="grid grid-cols-3 gap-3 mb-6 p-3 bg-gray-50 rounded-lg">
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">
-                  Название
-                </label>
+                <label class="block text-sm font-medium text-gray-700 mb-1"> Название </label>
                 <input
                   v-model="newItem.name"
                   type="text"
@@ -144,9 +142,7 @@ const runCalculation = () => {
                 />
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">
-                  Цена
-                </label>
+                <label class="block text-sm font-medium text-gray-700 mb-1"> Цена </label>
                 <input
                   v-model.number="newItem.price"
                   type="number"
@@ -155,9 +151,7 @@ const runCalculation = () => {
                 />
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">
-                  Количество
-                </label>
+                <label class="block text-sm font-medium text-gray-700 mb-1"> Количество </label>
                 <input
                   v-model.number="newItem.quantity"
                   type="number"
@@ -181,17 +175,16 @@ const runCalculation = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr 
-                  v-for="item in items" 
-                  :key="item.id"
-                  class="border-b hover:bg-gray-50"
-                >
+                <tr v-for="item in items" :key="item.id" class="border-b hover:bg-gray-50">
                   <td class="p-3">{{ item.name }}</td>
                   <td class="p-3">{{ item.price }} ₽</td>
                   <td class="p-3">{{ item.quantity }}</td>
                   <td class="p-3">
                     {{ calculateItemTotal(item) }} ₽
-                    <span v-if="item.price > expensiveThreshold" class="ml-2 text-xs bg-red-100 text-red-800 px-1 rounded">
+                    <span
+                      v-if="item.price > expensiveThreshold"
+                      class="ml-2 text-xs bg-red-100 text-red-800 px-1 rounded"
+                    >
                       Дорогой
                     </span>
                   </td>
@@ -212,37 +205,32 @@ const runCalculation = () => {
         <!-- Computed результаты -->
         <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
           <h4 class="font-semibold text-gray-900 mb-3">Computed свойства:</h4>
-          
+
           <div class="grid grid-cols-2 gap-4">
             <div class="p-3 bg-blue-50 rounded-lg">
               <div class="text-sm text-blue-600">Общая стоимость</div>
               <div class="text-lg font-bold text-blue-800">{{ totalWithComputed }} ₽</div>
-              <div class="text-xs text-blue-500 mt-1">
-                Кэшируется автоматически
-              </div>
+              <div class="text-xs text-blue-500 mt-1">Кэшируется автоматически</div>
             </div>
-            
+
             <div class="p-3 bg-green-50 rounded-lg">
               <div class="text-sm text-green-600">Средняя цена</div>
               <div class="text-lg font-bold text-green-800">{{ averagePrice }} ₽</div>
-              <div class="text-xs text-green-500 mt-1">
-                Обновляется при изменении товаров
-              </div>
+              <div class="text-xs text-green-500 mt-1">Обновляется при изменении товаров</div>
             </div>
           </div>
-          
+
           <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
             <div class="flex justify-between items-center">
               <div>
-                <div class="text-sm text-yellow-800">Дорогих товаров (>{{
-                  expensiveThreshold }}₽):</div>
+                <div class="text-sm text-yellow-800">
+                  Дорогих товаров (>{{ expensiveThreshold }}₽):
+                </div>
                 <div class="font-medium text-yellow-900">
                   {{ expensiveItems.length }}
                 </div>
               </div>
-              <div class="text-xs text-yellow-600">
-                Reactivity в действии
-              </div>
+              <div class="text-xs text-yellow-600">Reactivity в действии</div>
             </div>
           </div>
         </div>
@@ -251,9 +239,7 @@ const runCalculation = () => {
       <!-- Правая колонка: мемоизация и v-once -->
       <div class="space-y-6">
         <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-          <h3 class="text-lg font-semibold text-gray-900 mb-4">
-            Мемоизация и v-once
-          </h3>
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Мемоизация и v-once</h3>
 
           <!-- Демонстрация мемоизации -->
           <div class="mb-6">
@@ -275,7 +261,7 @@ const runCalculation = () => {
                   </span>
                 </div>
               </div>
-              
+
               <button
                 @click="runCalculation"
                 class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
@@ -292,21 +278,19 @@ const runCalculation = () => {
                     {{ calculationResult.toFixed(6) }}
                   </div>
                 </div>
-                
+
                 <div class="p-3 bg-red-50 rounded-lg">
                   <div class="text-sm text-red-600">Вызовов функции</div>
                   <div class="text-lg font-bold text-red-800">
                     {{ heavyCalculationCalls }}
                   </div>
-                  <div class="text-xs text-red-500 mt-1">
-                    Без кэша: {{ calculationInput * 10 }}
-                  </div>
+                  <div class="text-xs text-red-500 mt-1">Без кэша: {{ calculationInput * 10 }}</div>
                 </div>
               </div>
-              
+
               <div class="mt-3 text-sm text-gray-600">
-                Мемоизация уменьшает вызовы тяжелой функции с {{ calculationInput * 10 }}
-                до {{ heavyCalculationCalls }}
+                Мемоизация уменьшает вызовы тяжелой функции с {{ calculationInput * 10 }} до
+                {{ heavyCalculationCalls }}
               </div>
             </div>
           </div>
@@ -314,7 +298,7 @@ const runCalculation = () => {
           <!-- v-once демонстрация -->
           <div>
             <h4 class="font-medium text-gray-900 mb-3">Директива v-once:</h4>
-            
+
             <div class="p-4 bg-gray-900 text-gray-100 rounded-lg mb-3">
               <div class="text-green-400">&lt;!-- Статичный контент --&gt;</div>
               <div class="my-2">
@@ -328,12 +312,12 @@ const runCalculation = () => {
                 &lt;/p&gt;
               </div>
             </div>
-            
+
             <div class="p-3 bg-green-50 rounded-lg">
               <p class="text-green-800 text-sm">
-                <strong>v-once</strong> сообщает Vue, что элемент и его дочерние элементы
-                считаются статичными и должны рендериться только один раз.
-                При последующих обновлениях они пропускаются.
+                <strong>v-once</strong> сообщает Vue, что элемент и его дочерние элементы считаются
+                статичными и должны рендериться только один раз. При последующих обновлениях они
+                пропускаются.
               </p>
             </div>
           </div>
@@ -342,7 +326,7 @@ const runCalculation = () => {
         <!-- Советы по оптимизации -->
         <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
           <h4 class="font-semibold text-gray-900 mb-3">Практические советы:</h4>
-          
+
           <div class="space-y-3">
             <div class="flex items-start">
               <div class="flex-shrink-0 mt-1">
@@ -357,7 +341,7 @@ const runCalculation = () => {
                 </p>
               </div>
             </div>
-            
+
             <div class="flex items-start">
               <div class="flex-shrink-0 mt-1">
                 <div class="h-5 w-5 rounded-full bg-green-100 flex items-center justify-center">
@@ -371,7 +355,7 @@ const runCalculation = () => {
                 </p>
               </div>
             </div>
-            
+
             <div class="flex items-start">
               <div class="flex-shrink-0 mt-1">
                 <div class="h-5 w-5 rounded-full bg-blue-100 flex items-center justify-center">
@@ -385,7 +369,7 @@ const runCalculation = () => {
                 </p>
               </div>
             </div>
-            
+
             <div class="flex items-start">
               <div class="flex-shrink-0 mt-1">
                 <div class="h-5 w-5 rounded-full bg-purple-100 flex items-center justify-center">

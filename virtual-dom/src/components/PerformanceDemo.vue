@@ -1,12 +1,12 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from "vue";
 
 // Демонстрация производительности
-const heavyListSize = ref(100)
-const useKeys = ref(true)
-const fps = ref(0)
-const frameCount = ref(0)
-const lastTime = ref(0)
+const heavyListSize = ref(100);
+const useKeys = ref(true);
+const fps = ref(0);
+const frameCount = ref(0);
+const lastTime = ref(0);
 
 // Генерация тяжелого списка.
 //
@@ -15,71 +15,71 @@ const lastTime = ref(0)
 // недостоверную цифру: computed кешируется и вычисляется лениво, поэтому ref
 // обновлялся не тогда, когда список действительно строился.
 const heavyListWithTiming = computed(() => {
-  const start = performance.now()
+  const start = performance.now();
   const list = Array.from({ length: heavyListSize.value }, (_, i) => ({
     id: useKeys.value ? `item-${i}` : i,
     name: `Элемент ${i + 1}`,
     value: Math.random() * 1000,
-    color: `hsl(${(i * 10) % 360}, 70%, 80%)`
-  }))
+    color: `hsl(${(i * 10) % 360}, 70%, 80%)`,
+  }));
 
-  return { list, elapsed: performance.now() - start }
-})
+  return { list, elapsed: performance.now() - start };
+});
 
-const heavyList = computed(() => heavyListWithTiming.value.list)
-const renderTime = computed(() => heavyListWithTiming.value.elapsed)
+const heavyList = computed(() => heavyListWithTiming.value.list);
+const renderTime = computed(() => heavyListWithTiming.value.elapsed);
 
 // Операции со списком
 const shuffleList = () => {
-  const array = [...heavyList.value]
+  const array = [...heavyList.value];
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]]
+    [array[i], array[j]] = [array[j], array[i]];
   }
   // В реальном приложении здесь было бы обновление реактивных данных
-  console.log('Список перемешан (в реальном приложении здесь было бы обновление данных)')
-}
+  console.log("Список перемешан (в реальном приложении здесь было бы обновление данных)");
+};
 
 const updateAllValues = () => {
   // В реальном приложении здесь обновлялись бы значения
-  console.log('Все значения обновлены (в реальном приложении здесь было бы обновление данных)')
-}
+  console.log("Все значения обновлены (в реальном приложении здесь было бы обновление данных)");
+};
 
 // FPS счетчик
 const updateFPS = () => {
-  const now = performance.now()
-  frameCount.value++
-  
+  const now = performance.now();
+  frameCount.value++;
+
   if (now >= lastTime.value + 1000) {
-    fps.value = frameCount.value
-    frameCount.value = 0
-    lastTime.value = now
+    fps.value = frameCount.value;
+    frameCount.value = 0;
+    lastTime.value = now;
   }
-  
-  requestAnimationFrame(updateFPS)
-}
+
+  requestAnimationFrame(updateFPS);
+};
 
 onMounted(() => {
-  lastTime.value = performance.now()
-  requestAnimationFrame(updateFPS)
-})
+  lastTime.value = performance.now();
+  requestAnimationFrame(updateFPS);
+});
 
 // DevTools интеграция
-const devToolsInfo = ref('')
+const devToolsInfo = ref("");
 
-if (typeof window !== 'undefined' && window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
-  devToolsInfo.value = 'Vue DevTools доступны'
+if (typeof window !== "undefined" && window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
+  devToolsInfo.value = "Vue DevTools доступны";
 }
 </script>
 
 <template>
   <div>
     <h2 class="text-2xl font-bold text-gray-800 mb-6">Производительность и мониторинг</h2>
-    
+
     <div class="mb-8">
       <p class="text-gray-600 mb-4">
-        Наблюдайте за производительностью рендеринга и учитесь оптимизировать
-        обновления Virtual DOM. Используйте Vue DevTools для анализа.
+        Наблюдайте за производительностью рендеринга и учитесь оптимизировать обновления Virtual
+        DOM. Используйте Vue DevTools для анализа.
       </p>
     </div>
 
@@ -103,7 +103,7 @@ if (typeof window !== 'undefined' && window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
                   />
                 </button>
               </div>
-              
+
               <div class="text-sm">
                 <span class="text-gray-600">Элементов:</span>
                 <span class="font-bold text-blue-600 ml-2">{{ heavyListSize }}</span>
@@ -131,7 +131,7 @@ if (typeof window !== 'undefined' && window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
                   <span>500</span>
                 </div>
               </div>
-              
+
               <div class="flex gap-2">
                 <button
                   @click="shuffleList"
@@ -161,7 +161,9 @@ if (typeof window !== 'undefined' && window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
                 <div class="flex justify-between items-center">
                   <div>
                     <span class="font-medium text-gray-900">{{ item.name }}</span>
-                    <span class="text-sm text-gray-700 ml-2">ID: {{ useKeys ? item.id : 'no-key' }}</span>
+                    <span class="text-sm text-gray-700 ml-2"
+                      >ID: {{ useKeys ? item.id : "no-key" }}</span
+                    >
                   </div>
                   <div class="text-lg font-bold text-gray-800">
                     {{ item.value.toFixed(2) }}
@@ -178,27 +180,28 @@ if (typeof window !== 'undefined' && window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
         <!-- Метрики производительности -->
         <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
           <h4 class="font-semibold text-gray-900 mb-3">Метрики производительности</h4>
-          
+
           <div class="grid grid-cols-2 gap-4">
             <div class="p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg">
               <div class="text-sm text-blue-600">Время рендеринга</div>
               <div class="text-2xl font-bold text-blue-800">{{ renderTime.toFixed(2) }} мс</div>
-              <div class="text-xs text-blue-500 mt-1">
-                Создание виртуального дерева
-              </div>
+              <div class="text-xs text-blue-500 mt-1">Создание виртуального дерева</div>
             </div>
-            
+
             <div class="p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-lg">
               <div class="text-sm text-green-600">FPS</div>
-              <div class="text-2xl font-bold" :class="fps >= 50 ? 'text-green-800' : fps >= 30 ? 'text-yellow-600' : 'text-red-600'">
+              <div
+                class="text-2xl font-bold"
+                :class="
+                  fps >= 50 ? 'text-green-800' : fps >= 30 ? 'text-yellow-600' : 'text-red-600'
+                "
+              >
                 {{ fps }}
               </div>
-              <div class="text-xs text-green-500 mt-1">
-                Кадров в секунду
-              </div>
+              <div class="text-xs text-green-500 mt-1">Кадров в секунду</div>
             </div>
           </div>
-          
+
           <div class="mt-4 p-3 bg-gray-50 rounded-lg">
             <div class="flex items-center justify-between">
               <div>
@@ -206,7 +209,7 @@ if (typeof window !== 'undefined' && window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
                 <div class="font-medium text-gray-900">{{ heavyListSize * 3 }}</div>
               </div>
               <div class="text-xs text-gray-500">
-                {{ useKeys ? 'С ключами' : 'Без ключей' }}
+                {{ useKeys ? "С ключами" : "Без ключей" }}
               </div>
             </div>
           </div>
@@ -216,21 +219,17 @@ if (typeof window !== 'undefined' && window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
       <!-- Правая колонка: советы и DevTools -->
       <div class="space-y-6">
         <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-          <h3 class="text-lg font-semibold text-gray-900 mb-4">
-            Vue DevTools и отладка
-          </h3>
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Vue DevTools и отладка</h3>
 
           <div class="mb-6">
             <p class="text-gray-600 mb-4">
-              Используйте Vue DevTools для анализа производительности и
-              отслеживания обновлений компонентов.
+              Используйте Vue DevTools для анализа производительности и отслеживания обновлений
+              компонентов.
             </p>
 
             <div class="p-4 bg-gray-900 text-gray-100 rounded-lg mb-4">
               <div class="text-green-400">// Установка Vue DevTools</div>
-              <div class="my-2">
-                <span class="text-blue-400">npm install</span> @vue/devtools
-              </div>
+              <div class="my-2"><span class="text-blue-400">npm install</span> @vue/devtools</div>
               <div class="my-2">
                 <span class="text-purple-400">// Или расширение для браузера</span>
               </div>
@@ -244,7 +243,7 @@ if (typeof window !== 'undefined' && window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
           <!-- Возможности DevTools -->
           <div>
             <h4 class="font-medium text-gray-900 mb-3">Возможности DevTools:</h4>
-            
+
             <div class="space-y-3">
               <div class="flex items-center p-3 bg-blue-50 rounded-lg">
                 <div class="flex-shrink-0">
@@ -254,12 +253,10 @@ if (typeof window !== 'undefined' && window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
                 </div>
                 <div class="ml-3">
                   <p class="font-medium text-blue-800">Inspector компонентов</p>
-                  <p class="text-blue-600 text-sm">
-                    Просмотр дерева компонентов и их состояния
-                  </p>
+                  <p class="text-blue-600 text-sm">Просмотр дерева компонентов и их состояния</p>
                 </div>
               </div>
-              
+
               <div class="flex items-center p-3 bg-green-50 rounded-lg">
                 <div class="flex-shrink-0">
                   <div class="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center">
@@ -273,7 +270,7 @@ if (typeof window !== 'undefined' && window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
                   </p>
                 </div>
               </div>
-              
+
               <div class="flex items-center p-3 bg-purple-50 rounded-lg">
                 <div class="flex-shrink-0">
                   <div class="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center">
@@ -294,26 +291,30 @@ if (typeof window !== 'undefined' && window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
         <!-- Чеклист производительности -->
         <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
           <h4 class="font-semibold text-gray-900 mb-3">Чеклист производительности</h4>
-          
+
           <div class="space-y-3">
             <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
               <div class="flex items-center">
                 <div class="flex-shrink-0">
-                  <div class="h-5 w-5 rounded-full border-2 border-green-500 flex items-center justify-center">
+                  <div
+                    class="h-5 w-5 rounded-full border-2 border-green-500 flex items-center justify-center"
+                  >
                     <div v-if="useKeys" class="h-2 w-2 rounded-full bg-green-500"></div>
                   </div>
                 </div>
                 <span class="ml-3 text-gray-700">Ключи в v-for</span>
               </div>
               <span class="text-sm" :class="useKeys ? 'text-green-600' : 'text-red-600'">
-                {{ useKeys ? '✓' : '✗' }}
+                {{ useKeys ? "✓" : "✗" }}
               </span>
             </div>
-            
+
             <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
               <div class="flex items-center">
                 <div class="flex-shrink-0">
-                  <div class="h-5 w-5 rounded-full border-2 border-green-500 flex items-center justify-center">
+                  <div
+                    class="h-5 w-5 rounded-full border-2 border-green-500 flex items-center justify-center"
+                  >
                     <div class="h-2 w-2 rounded-full bg-green-500"></div>
                   </div>
                 </div>
@@ -321,11 +322,13 @@ if (typeof window !== 'undefined' && window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
               </div>
               <span class="text-green-600 text-sm">✓</span>
             </div>
-            
+
             <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
               <div class="flex items-center">
                 <div class="flex-shrink-0">
-                  <div class="h-5 w-5 rounded-full border-2 border-green-500 flex items-center justify-center">
+                  <div
+                    class="h-5 w-5 rounded-full border-2 border-green-500 flex items-center justify-center"
+                  >
                     <div class="h-2 w-2 rounded-full bg-green-500"></div>
                   </div>
                 </div>
@@ -333,26 +336,28 @@ if (typeof window !== 'undefined' && window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
               </div>
               <span class="text-green-600 text-sm">✓</span>
             </div>
-            
+
             <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
               <div class="flex items-center">
                 <div class="flex-shrink-0">
-                  <div class="h-5 w-5 rounded-full border-2 border-green-500 flex items-center justify-center">
+                  <div
+                    class="h-5 w-5 rounded-full border-2 border-green-500 flex items-center justify-center"
+                  >
                     <div class="h-2 w-2 rounded-full bg-green-500"></div>
                   </div>
                 </div>
                 <span class="ml-3 text-gray-700">FPS > 50</span>
               </div>
               <span class="text-sm" :class="fps >= 50 ? 'text-green-600' : 'text-red-600'">
-                {{ fps >= 50 ? '✓' : '✗' }}
+                {{ fps >= 50 ? "✓" : "✗" }}
               </span>
             </div>
           </div>
-          
+
           <div class="mt-4 p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg">
             <p class="text-blue-800 text-sm">
-              <strong>Совет:</strong> Используйте режим производительности в DevTools
-              для поиска компонентов, которые перерисовываются слишком часто.
+              <strong>Совет:</strong> Используйте режим производительности в DevTools для поиска
+              компонентов, которые перерисовываются слишком часто.
             </p>
           </div>
         </div>
@@ -360,11 +365,13 @@ if (typeof window !== 'undefined' && window.__VUE_DEVTOOLS_GLOBAL_HOOK__) {
     </div>
 
     <!-- Заключение -->
-    <div class="mt-8 p-6 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 rounded-xl">
+    <div
+      class="mt-8 p-6 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 rounded-xl"
+    >
       <h4 class="text-lg font-semibold text-gray-900 mb-3">Итог</h4>
       <p class="text-gray-600">
-        Virtual DOM в Vue — это мощный механизм, который автоматически оптимизирует обновления интерфейса.
-        Понимание его работы позволяет писать более производительные приложения.
+        Virtual DOM в Vue — это мощный механизм, который автоматически оптимизирует обновления
+        интерфейса. Понимание его работы позволяет писать более производительные приложения.
         Ключевые принципы: используйте ключи в списках, выносите вычисления в computed свойства,
         разделяйте большие компоненты и наблюдайте за производительностью через DevTools.
       </p>

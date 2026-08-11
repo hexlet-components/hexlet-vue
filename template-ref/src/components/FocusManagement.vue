@@ -1,89 +1,89 @@
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick } from "vue";
 
 // Автофокус при монтировании
-const autoFocusInput = ref(null)
+const autoFocusInput = ref(null);
 
 // Фокус по клику
-const focusInput = ref(null)
-const focusButton = ref(null)
+const focusInput = ref(null);
+const focusButton = ref(null);
 
 // Фокус по навигации
-const inputs = ref(Array(4).fill(null))
-const activeInputIndex = ref(0)
+const inputs = ref(Array(4).fill(null));
+const activeInputIndex = ref(0);
 
 // Фокус в модальном окне
-const showModal = ref(false)
-const modalInput = ref(null)
+const showModal = ref(false);
+const modalInput = ref(null);
 
 onMounted(() => {
   // Автофокус при загрузке
   if (autoFocusInput.value) {
-    autoFocusInput.value.focus()
+    autoFocusInput.value.focus();
   }
-  
+
   // Фокус на кнопку при монтировании
   if (focusButton.value) {
-    focusButton.value.focus()
+    focusButton.value.focus();
   }
-})
+});
 
 const setInputRef = (el, index) => {
-  inputs.value[index] = el
-}
+  inputs.value[index] = el;
+};
 
 const focusNextInput = () => {
   if (activeInputIndex.value < inputs.value.length - 1) {
-    activeInputIndex.value++
+    activeInputIndex.value++;
     setTimeout(() => {
       if (inputs.value[activeInputIndex.value]) {
-        inputs.value[activeInputIndex.value].focus()
+        inputs.value[activeInputIndex.value].focus();
       }
-    }, 10)
+    }, 10);
   }
-}
+};
 
 const focusPrevInput = () => {
   if (activeInputIndex.value > 0) {
-    activeInputIndex.value--
+    activeInputIndex.value--;
     setTimeout(() => {
       if (inputs.value[activeInputIndex.value]) {
-        inputs.value[activeInputIndex.value].focus()
+        inputs.value[activeInputIndex.value].focus();
       }
-    }, 10)
+    }, 10);
   }
-}
+};
 
 const openModal = async () => {
-  showModal.value = true
-  await nextTick()
-  
+  showModal.value = true;
+  await nextTick();
+
   if (modalInput.value) {
-    modalInput.value.focus()
+    modalInput.value.focus();
   }
-}
+};
 
 const closeModal = () => {
-  showModal.value = false
-}
+  showModal.value = false;
+};
 
 const handleModalKeydown = (e) => {
-  if (e.key === 'Escape') {
-    closeModal()
+  if (e.key === "Escape") {
+    closeModal();
   }
-}
+};
 </script>
 
 <template>
   <div>
     <h2 class="text-2xl font-bold text-gray-800 mb-6">Управление фокусом</h2>
-    
+
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <!-- Левая колонка: Базовые примеры -->
       <div class="space-y-6">
         <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
           <h3 class="text-lg font-semibold text-gray-900 mb-4">Автофокус при монтировании</h3>
-          
+
           <div class="mb-4">
             <input
               ref="autoFocusInput"
@@ -99,7 +99,7 @@ const handleModalKeydown = (e) => {
 
         <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
           <h3 class="text-lg font-semibold text-gray-900 mb-4">Фокус по клику</h3>
-          
+
           <div class="mb-4">
             <div class="flex gap-3 mb-3">
               <input
@@ -116,11 +116,11 @@ const handleModalKeydown = (e) => {
                 Установить фокус
               </button>
             </div>
-            
+
             <div class="p-3 bg-blue-50 rounded-lg">
               <p class="text-blue-800 text-sm">
-                Кнопка получает фокус при монтировании, при её нажатии фокус
-                переходит на input через template ref
+                Кнопка получает фокус при монтировании, при её нажатии фокус переходит на input
+                через template ref
               </p>
             </div>
           </div>
@@ -129,7 +129,7 @@ const handleModalKeydown = (e) => {
         <!-- Фокус в модальном окне -->
         <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
           <h3 class="text-lg font-semibold text-gray-900 mb-4">Фокус в модальном окне</h3>
-          
+
           <div class="mb-4">
             <button
               @click="openModal"
@@ -138,25 +138,22 @@ const handleModalKeydown = (e) => {
               Открыть модальное окно
             </button>
           </div>
-          
+
           <div
             v-if="showModal"
             class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
             @click.self="closeModal"
           >
-            <div
-              class="bg-white rounded-xl p-6 max-w-md w-full mx-4"
-              @keydown="handleModalKeydown"
-            >
+            <div class="bg-white rounded-xl p-6 max-w-md w-full mx-4" @keydown="handleModalKeydown">
               <h4 class="text-lg font-semibold text-gray-900 mb-4">Модальное окно</h4>
-              
+
               <input
                 ref="modalInput"
                 type="text"
                 class="w-full px-3 py-2 border border-gray-300 rounded-lg mb-4 outline-none"
                 placeholder="Автофокус при открытии"
               />
-              
+
               <div class="flex justify-between">
                 <button
                   @click="closeModal"
@@ -171,17 +168,15 @@ const handleModalKeydown = (e) => {
                   Сохранить
                 </button>
               </div>
-              
-              <p class="mt-4 text-gray-600 text-sm">
-                Нажмите Escape для закрытия окна
-              </p>
+
+              <p class="mt-4 text-gray-600 text-sm">Нажмите Escape для закрытия окна</p>
             </div>
           </div>
-          
+
           <div class="p-3 bg-purple-50 rounded-lg">
             <p class="text-purple-800 text-sm">
-              При открытии модального окна требуется nextTick() для ожидания
-              рендеринга DOM перед установкой фокуса
+              При открытии модального окна требуется nextTick() для ожидания рендеринга DOM перед
+              установкой фокуса
             </p>
           </div>
         </div>
@@ -191,13 +186,9 @@ const handleModalKeydown = (e) => {
       <div class="space-y-6">
         <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
           <h3 class="text-lg font-semibold text-gray-900 mb-4">Навигация по форме</h3>
-          
+
           <div class="space-y-4">
-            <div
-              v-for="index in 4"
-              :key="index"
-              class="flex items-center gap-3"
-            >
+            <div v-for="index in 4" :key="index" class="flex items-center gap-3">
               <span class="text-gray-600 w-8">#{{ index }}</span>
               <input
                 :ref="(el) => setInputRef(el, index - 1)"
@@ -209,7 +200,7 @@ const handleModalKeydown = (e) => {
               />
             </div>
           </div>
-          
+
           <div class="flex gap-2 mt-4">
             <button
               @click="focusPrevInput"
@@ -226,13 +217,11 @@ const handleModalKeydown = (e) => {
               Следующее →
             </button>
           </div>
-          
+
           <div class="mt-4 p-3 bg-blue-50 rounded-lg">
             <div class="flex justify-between items-center">
               <span class="text-blue-800">Активное поле: {{ activeInputIndex + 1 }}</span>
-              <span class="text-blue-600 text-sm">
-                Используйте кнопки для навигации
-              </span>
+              <span class="text-blue-600 text-sm"> Используйте кнопки для навигации </span>
             </div>
           </div>
         </div>
@@ -240,7 +229,7 @@ const handleModalKeydown = (e) => {
         <!-- Советы по управлению фокусом -->
         <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
           <h3 class="text-lg font-semibold text-gray-900 mb-4">Советы по управлению фокусом</h3>
-          
+
           <div class="space-y-3">
             <div class="flex items-start p-3 bg-green-50 rounded-lg">
               <div class="flex-shrink-0 mt-1">
@@ -250,12 +239,10 @@ const handleModalKeydown = (e) => {
               </div>
               <div class="ml-3">
                 <p class="font-medium text-green-800">Всегда используйте nextTick</p>
-                <p class="text-green-600 text-sm">
-                  При работе с условно рендерящимися элементами
-                </p>
+                <p class="text-green-600 text-sm">При работе с условно рендерящимися элементами</p>
               </div>
             </div>
-            
+
             <div class="flex items-start p-3 bg-yellow-50 rounded-lg">
               <div class="flex-shrink-0 mt-1">
                 <div class="h-6 w-6 rounded-full bg-yellow-100 flex items-center justify-center">
@@ -264,12 +251,10 @@ const handleModalKeydown = (e) => {
               </div>
               <div class="ml-3">
                 <p class="font-medium text-yellow-800">Проверяйте наличие элемента</p>
-                <p class="text-yellow-600 text-sm">
-                  Перед вызовом методов фокуса
-                </p>
+                <p class="text-yellow-600 text-sm">Перед вызовом методов фокуса</p>
               </div>
             </div>
-            
+
             <div class="flex items-start p-3 bg-purple-50 rounded-lg">
               <div class="flex-shrink-0 mt-1">
                 <div class="h-6 w-6 rounded-full bg-purple-100 flex items-center justify-center">

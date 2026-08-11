@@ -1,6 +1,6 @@
 <script setup>
-import CounterControls from './shared/CounterControls.vue'
-import CounterMirror from './shared/CounterMirror.vue'
+import CounterControls from "./shared/CounterControls.vue";
+import CounterMirror from "./shared/CounterMirror.vue";
 </script>
 
 <template>

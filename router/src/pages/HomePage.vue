@@ -1,26 +1,26 @@
 <script setup>
 const cards = [
   {
-    title: 'Базовые маршруты',
-    description: 'Связываем URL и компоненты через routes + показываем их в router-view.',
-    to: '/basic'
+    title: "Базовые маршруты",
+    description: "Связываем URL и компоненты через routes + показываем их в router-view.",
+    to: "/basic",
   },
   {
-    title: 'Динамические параметры',
-    description: 'Маршрут вида /users/:id и реакция компонента на смену параметра.',
-    to: '/users/1'
+    title: "Динамические параметры",
+    description: "Маршрут вида /users/:id и реакция компонента на смену параметра.",
+    to: "/users/1",
   },
   {
-    title: 'Query-параметры',
-    description: 'Фильтры и пагинация в URL: /catalog?page=2&sort=price.',
-    to: '/catalog'
+    title: "Query-параметры",
+    description: "Фильтры и пагинация в URL: /catalog?page=2&sort=price.",
+    to: "/catalog",
   },
   {
-    title: 'Программная навигация',
-    description: 'router.push, router.replace, back/forward для переходов из JS-логики.',
-    to: '/actions'
-  }
-]
+    title: "Программная навигация",
+    description: "router.push, router.replace, back/forward для переходов из JS-логики.",
+    to: "/actions",
+  },
+];
 </script>
 
 <template>

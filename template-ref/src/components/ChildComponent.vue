@@ -1,40 +1,40 @@
 <script setup>
-import { ref, defineExpose } from 'vue'
+import { ref, defineExpose } from "vue";
 
 const props = defineProps({
   initialMessage: {
     type: String,
-    default: 'Дочерний компонент'
-  }
-})
+    default: "Дочерний компонент",
+  },
+});
 
-const counter = ref(0)
-const message = ref(props.initialMessage)
+const counter = ref(0);
+const message = ref(props.initialMessage);
 
 const incrementCounter = () => {
-  counter.value++
-  message.value = `Счетчик: ${counter.value}`
-}
+  counter.value++;
+  message.value = `Счетчик: ${counter.value}`;
+};
 
 const resetCounter = () => {
-  counter.value = 0
-  message.value = props.initialMessage
-}
+  counter.value = 0;
+  message.value = props.initialMessage;
+};
 
 const getState = () => {
   return {
     counter: counter.value,
-    message: message.value
-  }
-}
+    message: message.value,
+  };
+};
 
 // Экспортируем публичные методы
 defineExpose({
   incrementCounter,
   resetCounter,
   getState,
-  counter
-})
+  counter,
+});
 </script>
 
 <template>
@@ -49,8 +49,6 @@ defineExpose({
         +
       </button>
     </div>
-    <p class="mt-2 text-xs text-blue-500">
-      defineExpose открывает публичные методы
-    </p>
+    <p class="mt-2 text-xs text-blue-500">defineExpose открывает публичные методы</p>
   </div>
 </template>

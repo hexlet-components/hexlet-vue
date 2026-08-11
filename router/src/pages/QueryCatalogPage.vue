@@ -1,81 +1,85 @@
 <script setup>
-import { computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
-const route = useRoute()
-const router = useRouter()
+const route = useRoute();
+const router = useRouter();
 
 const products = [
-  { id: 1, title: 'Vue 3 Handbook', price: 1200 },
-  { id: 2, title: 'Router Patterns', price: 1800 },
-  { id: 3, title: 'Pinia Cookbook', price: 1500 },
-  { id: 4, title: 'TypeScript for Vue', price: 2400 },
-  { id: 5, title: 'Nuxt Practical Guide', price: 2900 },
-  { id: 6, title: 'Frontend Architecture', price: 2100 },
-  { id: 7, title: 'Testing Vue Apps', price: 1700 },
-  { id: 8, title: 'UI Performance Notes', price: 1300 }
-]
+  { id: 1, title: "Vue 3 Handbook", price: 1200 },
+  { id: 2, title: "Router Patterns", price: 1800 },
+  { id: 3, title: "Pinia Cookbook", price: 1500 },
+  { id: 4, title: "TypeScript for Vue", price: 2400 },
+  { id: 5, title: "Nuxt Practical Guide", price: 2900 },
+  { id: 6, title: "Frontend Architecture", price: 2100 },
+  { id: 7, title: "Testing Vue Apps", price: 1700 },
+  { id: 8, title: "UI Performance Notes", price: 1300 },
+];
 
-const perPage = 4
+const perPage = 4;
 
-const sort = computed(() => (route.query.sort === 'price' ? 'price' : 'title'))
+const sort = computed(() => (route.query.sort === "price" ? "price" : "title"));
 
 const page = computed(() => {
-  const value = Number(route.query.page ?? 1)
-  return Number.isInteger(value) && value > 0 ? value : 1
-})
+  const value = Number(route.query.page ?? 1);
+  return Number.isInteger(value) && value > 0 ? value : 1;
+});
 
 const sortedProducts = computed(() => {
-  const clone = [...products]
-  if (sort.value === 'price') {
-    return clone.sort((a, b) => a.price - b.price)
+  const clone = [...products];
+  if (sort.value === "price") {
+    return clone.sort((a, b) => a.price - b.price);
   }
-  return clone.sort((a, b) => a.title.localeCompare(b.title, 'ru'))
-})
+  return clone.sort((a, b) => a.title.localeCompare(b.title, "ru"));
+});
 
-const totalPages = computed(() => Math.max(1, Math.ceil(sortedProducts.value.length / perPage)))
-const safePage = computed(() => Math.min(page.value, totalPages.value))
+const totalPages = computed(() => Math.max(1, Math.ceil(sortedProducts.value.length / perPage)));
+const safePage = computed(() => Math.min(page.value, totalPages.value));
 
 const visibleProducts = computed(() => {
-  const start = (safePage.value - 1) * perPage
-  return sortedProducts.value.slice(start, start + perPage)
-})
+  const start = (safePage.value - 1) * perPage;
+  return sortedProducts.value.slice(start, start + perPage);
+});
 
 function updateQuery(nextQuery) {
-  router.push({ name: 'catalog', query: nextQuery })
+  router.push({ name: "catalog", query: nextQuery });
 }
 
 function setSort(nextSort) {
   updateQuery({
     ...route.query,
     sort: nextSort,
-    page: '1'
-  })
+    page: "1",
+  });
 }
 
 function setPage(nextPage) {
-  const normalized = Math.max(1, Math.min(totalPages.value, nextPage))
+  const normalized = Math.max(1, Math.min(totalPages.value, nextPage));
   updateQuery({
     ...route.query,
     sort: sort.value,
-    page: String(normalized)
-  })
+    page: String(normalized),
+  });
 }
 
 function resetQuery() {
-  router.push({ name: 'catalog', query: {} })
+  router.push({ name: "catalog", query: {} });
 }
 </script>
 
 <template>
   <div>
-    <h2 class="mb-6 text-2xl font-bold text-slate-900">Query-параметры: /catalog?page=&amp;sort=</h2>
+    <h2 class="mb-6 text-2xl font-bold text-slate-900">
+      Query-параметры: /catalog?page=&amp;sort=
+    </h2>
 
     <div class="mb-4 flex flex-wrap items-center gap-2">
       <button
         class="rounded-lg px-3 py-2 text-sm font-medium"
         :class="
-          sort === 'title' ? 'bg-cyan-600 text-white' : 'bg-cyan-100 text-cyan-800 hover:bg-cyan-200'
+          sort === 'title'
+            ? 'bg-cyan-600 text-white'
+            : 'bg-cyan-100 text-cyan-800 hover:bg-cyan-200'
         "
         @click="setSort('title')"
       >
@@ -84,7 +88,9 @@ function resetQuery() {
       <button
         class="rounded-lg px-3 py-2 text-sm font-medium"
         :class="
-          sort === 'price' ? 'bg-cyan-600 text-white' : 'bg-cyan-100 text-cyan-800 hover:bg-cyan-200'
+          sort === 'price'
+            ? 'bg-cyan-600 text-white'
+            : 'bg-cyan-100 text-cyan-800 hover:bg-cyan-200'
         "
         @click="setSort('price')"
       >

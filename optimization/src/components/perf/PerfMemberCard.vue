@@ -1,16 +1,16 @@
 <script setup>
-import { onUpdated, ref } from 'vue'
+import { onUpdated, ref } from "vue";
 
 defineProps({
   member: { type: Object, required: true },
-  mode: { type: String, required: true }
-})
+  mode: { type: String, required: true },
+});
 
-const updateCount = ref(0)
+const updateCount = ref(0);
 
 onUpdated(() => {
-  updateCount.value += 1
-})
+  updateCount.value += 1;
+});
 </script>
 
 <template>
@@ -19,9 +19,11 @@ onUpdated(() => {
       <h4 class="font-medium text-slate-900">{{ member.name }}</h4>
       <span
         class="rounded-full px-2 py-1 text-xs font-medium"
-        :class="mode === 'plain' ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'"
+        :class="
+          mode === 'plain' ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
+        "
       >
-        {{ mode === 'plain' ? 'обычно' : 'v-memo' }}
+        {{ mode === "plain" ? "обычно" : "v-memo" }}
       </span>
     </div>
     <p class="text-sm text-slate-600">Score: {{ member.score }}</p>

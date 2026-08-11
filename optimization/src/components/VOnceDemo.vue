@@ -1,11 +1,11 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const counter = ref(0)
-const note = ref('Стартовое значение')
+const counter = ref(0);
+const note = ref("Стартовое значение");
 
 function bump() {
-  counter.value += 1
+  counter.value += 1;
 }
 </script>
 
@@ -25,7 +25,7 @@ function bump() {
         type="text"
         class="w-full max-w-xs rounded-lg border border-slate-300 px-3 py-2 text-sm"
         placeholder="Измените текст"
-      >
+      />
       <span class="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-700">
         counter: {{ counter }}
       </span>

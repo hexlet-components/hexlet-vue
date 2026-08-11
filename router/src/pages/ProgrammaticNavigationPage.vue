@@ -1,63 +1,63 @@
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 
-const router = useRouter()
+const router = useRouter();
 
-const email = ref('student@example.com')
-const role = ref('editor')
-const submitting = ref(false)
-const events = ref([])
+const email = ref("student@example.com");
+const role = ref("editor");
+const submitting = ref(false);
+const events = ref([]);
 
 function addEvent(text) {
   events.value.unshift({
     id: Date.now() + Math.random(),
     text,
-    time: new Date().toLocaleTimeString()
-  })
-  events.value = events.value.slice(0, 8)
+    time: new Date().toLocaleTimeString(),
+  });
+  events.value = events.value.slice(0, 8);
 }
 
 async function submitForm() {
-  submitting.value = true
-  addEvent('submit -> router.push({ name: "success" })')
-  await new Promise(resolve => setTimeout(resolve, 500))
+  submitting.value = true;
+  addEvent('submit -> router.push({ name: "success" })');
+  await new Promise((resolve) => setTimeout(resolve, 500));
 
   router.push({
-    name: 'success',
+    name: "success",
     query: {
-      from: 'actions',
+      from: "actions",
       email: email.value,
-      role: role.value
-    }
-  })
+      role: role.value,
+    },
+  });
 
-  submitting.value = false
+  submitting.value = false;
 }
 
 function openUserThree() {
-  addEvent('router.push({ name: "user", params: { id: 3 } })')
-  router.push({ name: 'user', params: { id: 3 } })
+  addEvent('router.push({ name: "user", params: { id: 3 } })');
+  router.push({ name: "user", params: { id: 3 } });
 }
 
 function openCatalogPage2() {
-  addEvent('router.push({ name: "catalog", query: { page: 2, sort: "price" } })')
-  router.push({ name: 'catalog', query: { page: '2', sort: 'price' } })
+  addEvent('router.push({ name: "catalog", query: { page: 2, sort: "price" } })');
+  router.push({ name: "catalog", query: { page: "2", sort: "price" } });
 }
 
 function replaceToHome() {
-  addEvent('router.replace({ name: "home" })')
-  router.replace({ name: 'home' })
+  addEvent('router.replace({ name: "home" })');
+  router.replace({ name: "home" });
 }
 
 function goBack() {
-  addEvent('router.back()')
-  router.back()
+  addEvent("router.back()");
+  router.back();
 }
 
 function goForward() {
-  addEvent('router.forward()')
-  router.forward()
+  addEvent("router.forward()");
+  router.forward();
 }
 </script>
 
@@ -76,7 +76,7 @@ function goForward() {
               v-model="email"
               type="email"
               class="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2"
-            >
+            />
           </label>
 
           <label class="block text-sm text-slate-700">
@@ -96,7 +96,7 @@ function goForward() {
             class="rounded-lg bg-cyan-600 px-4 py-2 text-sm font-medium text-white hover:bg-cyan-700 disabled:cursor-not-allowed disabled:opacity-60"
             :disabled="submitting"
           >
-            {{ submitting ? 'Переходим...' : 'Отправить и перейти на /success' }}
+            {{ submitting ? "Переходим..." : "Отправить и перейти на /success" }}
           </button>
         </form>
       </section>
@@ -139,9 +139,7 @@ function goForward() {
         <div class="mt-5 rounded-lg border border-slate-200 bg-slate-50 p-3">
           <p class="mb-2 text-sm font-medium text-slate-700">Лог действий</p>
           <ul v-if="events.length" class="space-y-1 text-sm text-slate-600">
-            <li v-for="item in events" :key="item.id">
-              {{ item.time }}: {{ item.text }}
-            </li>
+            <li v-for="item in events" :key="item.id">{{ item.time }}: {{ item.text }}</li>
           </ul>
           <p v-else class="text-sm text-slate-500">Пока нет действий</p>
         </div>

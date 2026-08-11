@@ -1,16 +1,16 @@
 <script setup>
-import { computed } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useCounterStore } from '@/stores/counter'
+import { computed } from "vue";
+import { storeToRefs } from "pinia";
+import { useCounterStore } from "@/stores/counter";
 
-const counter = useCounterStore()
-const { count, step, doubleCount, isPositive, parity } = storeToRefs(counter)
+const counter = useCounterStore();
+const { count, step, doubleCount, isPositive, parity } = storeToRefs(counter);
 
 const signLabel = computed(() => {
-  if (count.value > 0) return 'положительное'
-  if (count.value < 0) return 'отрицательное'
-  return 'нулевое'
-})
+  if (count.value > 0) return "положительное";
+  if (count.value < 0) return "отрицательное";
+  return "нулевое";
+});
 </script>
 
 <template>
@@ -54,7 +54,7 @@ const signLabel = computed(() => {
             class="mt-2 w-full"
             :value="step"
             @input="counter.setStep($event.target.value)"
-          >
+          />
         </label>
         <p class="mt-2 text-sm text-slate-500">Текущее значение step: {{ step }}</p>
       </section>
@@ -66,7 +66,9 @@ const signLabel = computed(() => {
         </p>
 
         <div class="space-y-3 text-sm">
-          <div class="rounded-lg bg-blue-50 p-3 text-blue-900">count: <strong>{{ count }}</strong></div>
+          <div class="rounded-lg bg-blue-50 p-3 text-blue-900">
+            count: <strong>{{ count }}</strong>
+          </div>
           <div class="rounded-lg bg-emerald-50 p-3 text-emerald-900">
             doubleCount: <strong>{{ doubleCount }}</strong>
           </div>

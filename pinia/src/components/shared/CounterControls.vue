@@ -1,9 +1,9 @@
 <script setup>
-import { storeToRefs } from 'pinia'
-import { useCounterStore } from '@/stores/counter'
+import { storeToRefs } from "pinia";
+import { useCounterStore } from "@/stores/counter";
 
-const counter = useCounterStore()
-const { count, step } = storeToRefs(counter)
+const counter = useCounterStore();
+const { count, step } = storeToRefs(counter);
 </script>
 
 <template>
@@ -22,7 +22,7 @@ const { count, step } = storeToRefs(counter)
         class="mt-2 w-24 rounded-lg border border-slate-300 px-3 py-2"
         :value="step"
         @input="counter.setStep($event.target.value)"
-      >
+      />
     </label>
 
     <div class="flex flex-wrap gap-2">

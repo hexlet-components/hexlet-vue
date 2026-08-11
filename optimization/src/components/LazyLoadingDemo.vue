@@ -1,25 +1,25 @@
 <script setup>
-import { defineAsyncComponent, ref } from 'vue'
+import { defineAsyncComponent, ref } from "vue";
 
-const showPanel = ref(false)
-const openCount = ref(0)
+const showPanel = ref(false);
+const openCount = ref(0);
 
 const AsyncAnalyticsPanel = defineAsyncComponent({
   loader: () =>
-    new Promise(resolve => {
-      setTimeout(() => resolve(import('./perf/HeavyAnalyticsPanel.vue')), 800)
+    new Promise((resolve) => {
+      setTimeout(() => resolve(import("./perf/HeavyAnalyticsPanel.vue")), 800);
     }),
   delay: 150,
-  timeout: 7000
-})
+  timeout: 7000,
+});
 
 function openPanel() {
-  showPanel.value = true
-  openCount.value += 1
+  showPanel.value = true;
+  openCount.value += 1;
 }
 
 function closePanel() {
-  showPanel.value = false
+  showPanel.value = false;
 }
 </script>
 

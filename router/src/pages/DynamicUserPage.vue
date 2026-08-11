@@ -1,58 +1,58 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { computed, ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
-const route = useRoute()
-const router = useRouter()
+const route = useRoute();
+const router = useRouter();
 
 const users = [
-  { id: 1, name: 'Анна Смирнова', role: 'Frontend Developer', city: 'Москва' },
-  { id: 2, name: 'Дмитрий Ковалев', role: 'Backend Developer', city: 'Санкт-Петербург' },
-  { id: 3, name: 'Ольга Никитина', role: 'Product Designer', city: 'Казань' },
-  { id: 4, name: 'Иван Петров', role: 'QA Engineer', city: 'Новосибирск' }
-]
+  { id: 1, name: "Анна Смирнова", role: "Frontend Developer", city: "Москва" },
+  { id: 2, name: "Дмитрий Ковалев", role: "Backend Developer", city: "Санкт-Петербург" },
+  { id: 3, name: "Ольга Никитина", role: "Product Designer", city: "Казань" },
+  { id: 4, name: "Иван Петров", role: "QA Engineer", city: "Новосибирск" },
+];
 
-const loading = ref(false)
-const loadedAt = ref('—')
-const loadCount = ref(0)
+const loading = ref(false);
+const loadedAt = ref("—");
+const loadCount = ref(0);
 
-const minId = users[0].id
-const maxId = users[users.length - 1].id
+const minId = users[0].id;
+const maxId = users[users.length - 1].id;
 
 const currentId = computed(() => {
-  const parsed = Number(route.params.id)
-  return Number.isInteger(parsed) && parsed >= minId && parsed <= maxId ? parsed : minId
-})
+  const parsed = Number(route.params.id);
+  return Number.isInteger(parsed) && parsed >= minId && parsed <= maxId ? parsed : minId;
+});
 
-const currentUser = computed(() => users.find(user => user.id === currentId.value) ?? users[0])
+const currentUser = computed(() => users.find((user) => user.id === currentId.value) ?? users[0]);
 
 function openUser(id) {
-  router.push({ name: 'user', params: { id } })
+  router.push({ name: "user", params: { id } });
 }
 
 function openPrev() {
-  if (currentId.value > minId) openUser(currentId.value - 1)
+  if (currentId.value > minId) openUser(currentId.value - 1);
 }
 
 function openNext() {
-  if (currentId.value < maxId) openUser(currentId.value + 1)
+  if (currentId.value < maxId) openUser(currentId.value + 1);
 }
 
 async function simulateLoad() {
-  loading.value = true
-  await new Promise(resolve => setTimeout(resolve, 250))
-  loadedAt.value = new Date().toLocaleTimeString()
-  loadCount.value += 1
-  loading.value = false
+  loading.value = true;
+  await new Promise((resolve) => setTimeout(resolve, 250));
+  loadedAt.value = new Date().toLocaleTimeString();
+  loadCount.value += 1;
+  loading.value = false;
 }
 
 watch(
   () => route.params.id,
   async () => {
-    await simulateLoad()
+    await simulateLoad();
   },
-  { immediate: true }
-)
+  { immediate: true },
+);
 </script>
 
 <template>
@@ -94,7 +94,9 @@ watch(
         :key="user.id"
         class="rounded-lg px-3 py-2 text-sm font-medium"
         :class="
-          user.id === currentId ? 'bg-cyan-600 text-white' : 'bg-cyan-100 text-cyan-800 hover:bg-cyan-200'
+          user.id === currentId
+            ? 'bg-cyan-600 text-white'
+            : 'bg-cyan-100 text-cyan-800 hover:bg-cyan-200'
         "
         @click="openUser(user.id)"
       >

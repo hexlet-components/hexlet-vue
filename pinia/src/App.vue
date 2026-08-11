@@ -1,28 +1,28 @@
 <script setup>
-import { ref, shallowRef } from 'vue'
-import IntroPinia from './components/IntroPinia.vue'
-import SharedStateDemo from './components/SharedStateDemo.vue'
-import ActionsGettersDemo from './components/ActionsGettersDemo.vue'
-import AsyncUsersDemo from './components/AsyncUsersDemo.vue'
-import SetupStoreDemo from './components/SetupStoreDemo.vue'
-import PracticalCaseDemo from './components/PracticalCaseDemo.vue'
+import { ref, shallowRef } from "vue";
+import IntroPinia from "./components/IntroPinia.vue";
+import SharedStateDemo from "./components/SharedStateDemo.vue";
+import ActionsGettersDemo from "./components/ActionsGettersDemo.vue";
+import AsyncUsersDemo from "./components/AsyncUsersDemo.vue";
+import SetupStoreDemo from "./components/SetupStoreDemo.vue";
+import PracticalCaseDemo from "./components/PracticalCaseDemo.vue";
 
 const tabs = [
-  { id: 1, name: 'Введение', component: IntroPinia },
-  { id: 2, name: 'Общее состояние', component: SharedStateDemo },
-  { id: 3, name: 'Actions и Getters', component: ActionsGettersDemo },
-  { id: 4, name: 'Async Actions', component: AsyncUsersDemo },
-  { id: 5, name: 'Setup Store', component: SetupStoreDemo },
-  { id: 6, name: 'Практический кейс', component: PracticalCaseDemo }
-]
+  { id: 1, name: "Введение", component: IntroPinia },
+  { id: 2, name: "Общее состояние", component: SharedStateDemo },
+  { id: 3, name: "Actions и Getters", component: ActionsGettersDemo },
+  { id: 4, name: "Async Actions", component: AsyncUsersDemo },
+  { id: 5, name: "Setup Store", component: SetupStoreDemo },
+  { id: 6, name: "Практический кейс", component: PracticalCaseDemo },
+];
 
-const activeTab = ref(1)
-const activeComponent = shallowRef(IntroPinia)
+const activeTab = ref(1);
+const activeComponent = shallowRef(IntroPinia);
 
 function switchTab(tabId) {
-  activeTab.value = tabId
-  const tab = tabs.find(item => item.id === tabId)
-  if (tab) activeComponent.value = tab.component
+  activeTab.value = tabId;
+  const tab = tabs.find((item) => item.id === tabId);
+  if (tab) activeComponent.value = tab.component;
 }
 </script>
 
@@ -73,12 +73,24 @@ function switchTab(tabId) {
           <section>
             <h2 class="mb-3 text-xl font-semibold text-slate-900">Что показано в проекте</h2>
             <div class="flex flex-wrap gap-2 text-sm">
-              <span class="rounded-full bg-blue-100 px-3 py-1 text-blue-800"><code>defineStore</code></span>
-              <span class="rounded-full bg-green-100 px-3 py-1 text-green-800"><code>state</code></span>
-              <span class="rounded-full bg-yellow-100 px-3 py-1 text-yellow-800"><code>actions</code></span>
-              <span class="rounded-full bg-purple-100 px-3 py-1 text-purple-800"><code>getters</code></span>
-              <span class="rounded-full bg-pink-100 px-3 py-1 text-pink-800"><code>storeToRefs</code></span>
-              <span class="rounded-full bg-cyan-100 px-3 py-1 text-cyan-800"><code>setup store</code></span>
+              <span class="rounded-full bg-blue-100 px-3 py-1 text-blue-800"
+                ><code>defineStore</code></span
+              >
+              <span class="rounded-full bg-green-100 px-3 py-1 text-green-800"
+                ><code>state</code></span
+              >
+              <span class="rounded-full bg-yellow-100 px-3 py-1 text-yellow-800"
+                ><code>actions</code></span
+              >
+              <span class="rounded-full bg-purple-100 px-3 py-1 text-purple-800"
+                ><code>getters</code></span
+              >
+              <span class="rounded-full bg-pink-100 px-3 py-1 text-pink-800"
+                ><code>storeToRefs</code></span
+              >
+              <span class="rounded-full bg-cyan-100 px-3 py-1 text-cyan-800"
+                ><code>setup store</code></span
+              >
             </div>
           </section>
         </div>

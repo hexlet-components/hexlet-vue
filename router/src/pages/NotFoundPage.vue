@@ -1,7 +1,7 @@
 <script setup>
-import { useRoute } from 'vue-router'
+import { useRoute } from "vue-router";
 
-const route = useRoute()
+const route = useRoute();
 </script>
 
 <template>
@@ -10,7 +10,10 @@ const route = useRoute()
     <p class="mb-4 text-red-800">
       Маршрут <code>{{ route.fullPath }}</code> отсутствует в конфигурации.
     </p>
-    <router-link to="/" class="rounded-lg bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800">
+    <router-link
+      to="/"
+      class="rounded-lg bg-red-700 px-4 py-2 text-sm font-medium text-white hover:bg-red-800"
+    >
       Вернуться на главную
     </router-link>
   </div>

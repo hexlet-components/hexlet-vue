@@ -1,135 +1,137 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted } from "vue";
 
 // Базовый скроллинг
-const scrollContainer = ref(null)
-const scrollPosition = ref(0)
+const scrollContainer = ref(null);
+const scrollPosition = ref(0);
 
 // Программная прокрутка к элементам
-const itemsContainer = ref(null)
-const items = ref(Array.from({ length: 20 }, (_, i) => ({
-  id: i + 1,
-  text: `Элемент ${i + 1}`,
-  ref: null
-})))
+const itemsContainer = ref(null);
+const items = ref(
+  Array.from({ length: 20 }, (_, i) => ({
+    id: i + 1,
+    text: `Элемент ${i + 1}`,
+    ref: null,
+  })),
+);
 
 // Smooth скроллинг
-const smoothContainer = ref(null)
+const smoothContainer = ref(null);
 
 // Infinite scroll
-const infiniteContainer = ref(null)
-const infiniteItems = ref(Array.from({ length: 10 }, (_, i) => `Элемент ${i + 1}`))
-const isLoading = ref(false)
+const infiniteContainer = ref(null);
+const infiniteItems = ref(Array.from({ length: 10 }, (_, i) => `Элемент ${i + 1}`));
+const isLoading = ref(false);
 
 onMounted(() => {
   // Обновление позиции прокрутки
   if (scrollContainer.value) {
-    scrollContainer.value.addEventListener('scroll', updateScrollPosition)
+    scrollContainer.value.addEventListener("scroll", updateScrollPosition);
   }
-  
+
   // Infinite scroll observer
   if (infiniteContainer.value) {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !isLoading.value) {
-        loadMoreItems()
-      }
-    }, { threshold: 0.1 })
-    
-    observer.observe(infiniteContainer.value.lastElementChild)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !isLoading.value) {
+          loadMoreItems();
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    observer.observe(infiniteContainer.value.lastElementChild);
   }
-})
+});
 
 const updateScrollPosition = () => {
   if (scrollContainer.value) {
-    const container = scrollContainer.value
-    const maxScroll = container.scrollHeight - container.clientHeight
-    const percentage = maxScroll > 0 ? (container.scrollTop / maxScroll) * 100 : 0
-    scrollPosition.value = Math.round(percentage)
+    const container = scrollContainer.value;
+    const maxScroll = container.scrollHeight - container.clientHeight;
+    const percentage = maxScroll > 0 ? (container.scrollTop / maxScroll) * 100 : 0;
+    scrollPosition.value = Math.round(percentage);
   }
-}
+};
 
 const scrollToTop = () => {
   if (scrollContainer.value) {
-    scrollContainer.value.scrollTop = 0
+    scrollContainer.value.scrollTop = 0;
   }
-}
+};
 
 const scrollToBottom = () => {
   if (scrollContainer.value) {
-    scrollContainer.value.scrollTop = scrollContainer.value.scrollHeight
+    scrollContainer.value.scrollTop = scrollContainer.value.scrollHeight;
   }
-}
+};
 
 const scrollBy = (amount) => {
   if (scrollContainer.value) {
-    scrollContainer.value.scrollTop += amount
+    scrollContainer.value.scrollTop += amount;
   }
-}
+};
 
 const scrollToItem = (index) => {
   if (itemsContainer.value && items.value[index]?.ref) {
-    items.value[index].ref.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    items.value[index].ref.scrollIntoView({ behavior: "smooth", block: "center" });
   }
-}
+};
 
 const smoothScrollTo = (position) => {
   if (smoothContainer.value) {
     smoothContainer.value.scrollTo({
       top: position,
-      behavior: 'smooth'
-    })
+      behavior: "smooth",
+    });
   }
-}
+};
 
 const setItemRef = (el, index) => {
   if (el) {
-    items.value[index].ref = el
+    items.value[index].ref = el;
   }
-}
+};
 
 const loadMoreItems = async () => {
-  if (isLoading.value) return
-  
-  isLoading.value = true
-  
+  if (isLoading.value) return;
+
+  isLoading.value = true;
+
   // Имитация загрузки
-  await new Promise(resolve => setTimeout(resolve, 1000))
-  
-  const newItems = Array.from({ length: 5 }, (_, i) => 
-    `Элемент ${infiniteItems.value.length + i + 1}`
-  )
-  
-  infiniteItems.value.push(...newItems)
-  isLoading.value = false
-}
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  const newItems = Array.from(
+    { length: 5 },
+    (_, i) => `Элемент ${infiniteItems.value.length + i + 1}`,
+  );
+
+  infiniteItems.value.push(...newItems);
+  isLoading.value = false;
+};
 </script>
 
 <template>
   <div>
     <h2 class="text-2xl font-bold text-gray-800 mb-6">Управление прокруткой</h2>
-    
+
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <!-- Левая колонка: Базовый скроллинг -->
       <div class="space-y-6">
         <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
           <h3 class="text-lg font-semibold text-gray-900 mb-4">Базовый скроллинг</h3>
-          
+
           <div class="mb-4">
             <div
               ref="scrollContainer"
               class="h-64 overflow-y-auto border border-gray-300 rounded-lg mb-4"
             >
               <div class="p-4 space-y-2">
-                <div
-                  v-for="n in 30"
-                  :key="n"
-                  class="p-3 bg-gray-50 rounded border border-gray-200"
-                >
+                <div v-for="n in 30" :key="n" class="p-3 bg-gray-50 rounded border border-gray-200">
                   Элемент {{ n }}
                 </div>
               </div>
             </div>
-            
+
             <div class="flex items-center gap-3 mb-4">
               <div class="flex-1">
                 <div class="flex justify-between text-sm text-gray-600 mb-1">
@@ -145,7 +147,7 @@ const loadMoreItems = async () => {
                 </div>
               </div>
             </div>
-            
+
             <div class="grid grid-cols-4 gap-2">
               <button
                 @click="scrollToTop"
@@ -178,7 +180,7 @@ const loadMoreItems = async () => {
         <!-- Smooth скроллинг -->
         <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
           <h3 class="text-lg font-semibold text-gray-900 mb-4">Smooth скроллинг</h3>
-          
+
           <div class="mb-4">
             <div
               ref="smoothContainer"
@@ -196,7 +198,7 @@ const loadMoreItems = async () => {
                 </div>
               </div>
             </div>
-            
+
             <div class="flex flex-wrap gap-2">
               <button
                 v-for="n in 8"
@@ -208,12 +210,12 @@ const loadMoreItems = async () => {
               </button>
             </div>
           </div>
-          
+
           <div class="p-3 bg-purple-50 rounded-lg">
             <p class="text-purple-800 text-sm">
               Метод <code class="bg-purple-100 px-1 rounded">scrollTo</code> с параметром
-              <code class="bg-purple-100 px-1 rounded">behavior: 'smooth'</code> создаёт
-              плавную анимацию прокрутки.
+              <code class="bg-purple-100 px-1 rounded">behavior: 'smooth'</code> создаёт плавную
+              анимацию прокрутки.
             </p>
           </div>
         </div>
@@ -224,7 +226,7 @@ const loadMoreItems = async () => {
         <!-- Прокрутка к элементам -->
         <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
           <h3 class="text-lg font-semibold text-gray-900 mb-4">Прокрутка к элементам</h3>
-          
+
           <div class="mb-4">
             <div
               ref="itemsContainer"
@@ -241,7 +243,7 @@ const loadMoreItems = async () => {
                 </div>
               </div>
             </div>
-            
+
             <div class="flex flex-wrap gap-2">
               <button
                 v-for="n in 5"
@@ -253,7 +255,7 @@ const loadMoreItems = async () => {
               </button>
             </div>
           </div>
-          
+
           <div class="p-3 bg-green-50 rounded-lg">
             <p class="text-green-800 text-sm">
               Метод <code class="bg-green-100 px-1 rounded">scrollIntoView</code> прокручивает
@@ -265,7 +267,7 @@ const loadMoreItems = async () => {
         <!-- Infinite scroll -->
         <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
           <h3 class="text-lg font-semibold text-gray-900 mb-4">Infinite scroll</h3>
-          
+
           <div class="mb-4">
             <div
               ref="infiniteContainer"
@@ -279,24 +281,17 @@ const loadMoreItems = async () => {
                 >
                   {{ item }}
                 </div>
-                <div
-                  v-if="isLoading"
-                  class="p-4 text-center text-gray-600"
-                >
-                  Загрузка...
-                </div>
+                <div v-if="isLoading" class="p-4 text-center text-gray-600">Загрузка...</div>
               </div>
             </div>
-            
+
             <div class="p-3 bg-yellow-50 rounded-lg">
               <div class="flex justify-between items-center">
                 <div>
                   <span class="text-yellow-800">Загружено элементов:</span>
                   <span class="font-medium ml-2">{{ infiniteItems.length }}</span>
                 </div>
-                <span class="text-yellow-600 text-sm">
-                  Скролл до конца для загрузки
-                </span>
+                <span class="text-yellow-600 text-sm"> Скролл до конца для загрузки </span>
               </div>
             </div>
           </div>
@@ -305,7 +300,7 @@ const loadMoreItems = async () => {
         <!-- Свойства для прокрутки -->
         <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
           <h3 class="text-lg font-semibold text-gray-900 mb-4">Свойства и методы прокрутки</h3>
-          
+
           <div class="space-y-2">
             <div class="flex justify-between items-center p-2 bg-gray-50 rounded">
               <code class="text-sm text-gray-700">scrollTop</code>

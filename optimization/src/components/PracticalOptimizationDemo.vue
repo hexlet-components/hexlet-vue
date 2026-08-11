@@ -1,60 +1,68 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref } from "vue";
 
 const symptoms = [
-  { id: 'list-jumps', label: 'Список "прыгает" при вставке элемента в начало' },
-  { id: 'static-rerender', label: 'Тяжелый статичный блок обновляется при каждом клике' },
-  { id: 'first-load-heavy', label: 'Слишком тяжелый первый экран и медленный старт' },
-  { id: 'repeat-updates', label: 'Много карточек обновляются без реальной причины' }
-]
+  { id: "list-jumps", label: 'Список "прыгает" при вставке элемента в начало' },
+  { id: "static-rerender", label: "Тяжелый статичный блок обновляется при каждом клике" },
+  { id: "first-load-heavy", label: "Слишком тяжелый первый экран и медленный старт" },
+  { id: "repeat-updates", label: "Много карточек обновляются без реальной причины" },
+];
 
-const selectedSymptoms = ref(['list-jumps', 'first-load-heavy'])
+const selectedSymptoms = ref(["list-jumps", "first-load-heavy"]);
 
 const playbook = {
-  'list-jumps': [
-    { id: 'k1', title: 'Добавить стабильный :key', details: 'Используйте уникальный id, а не индекс.' }
-  ],
-  'static-rerender': [
-    { id: 'o1', title: 'Зафиксировать блок через v-once', details: 'Подходит для полностью статичного UI.' }
-  ],
-  'first-load-heavy': [
+  "list-jumps": [
     {
-      id: 'l1',
-      title: 'Вынести редкие части в lazy loading',
-      details: 'Загружайте тяжелые компоненты по требованию.'
+      id: "k1",
+      title: "Добавить стабильный :key",
+      details: "Используйте уникальный id, а не индекс.",
+    },
+  ],
+  "static-rerender": [
+    {
+      id: "o1",
+      title: "Зафиксировать блок через v-once",
+      details: "Подходит для полностью статичного UI.",
+    },
+  ],
+  "first-load-heavy": [
+    {
+      id: "l1",
+      title: "Вынести редкие части в lazy loading",
+      details: "Загружайте тяжелые компоненты по требованию.",
     },
     {
-      id: 'l2',
-      title: 'Показать fallback через Suspense',
-      details: 'Сделайте загрузку понятной для пользователя.'
-    }
+      id: "l2",
+      title: "Показать fallback через Suspense",
+      details: "Сделайте загрузку понятной для пользователя.",
+    },
   ],
-  'repeat-updates': [
+  "repeat-updates": [
     {
-      id: 'm1',
-      title: 'Ограничить обновления с v-memo',
-      details: 'Рендерить блок только при изменении ключевых зависимостей.'
-    }
-  ]
-}
+      id: "m1",
+      title: "Ограничить обновления с v-memo",
+      details: "Рендерить блок только при изменении ключевых зависимостей.",
+    },
+  ],
+};
 
 function toggleSymptom(id) {
   if (selectedSymptoms.value.includes(id)) {
-    selectedSymptoms.value = selectedSymptoms.value.filter(item => item !== id)
-    return
+    selectedSymptoms.value = selectedSymptoms.value.filter((item) => item !== id);
+    return;
   }
-  selectedSymptoms.value = [...selectedSymptoms.value, id]
+  selectedSymptoms.value = [...selectedSymptoms.value, id];
 }
 
 const recommendations = computed(() => {
-  const unique = new Map()
-  selectedSymptoms.value.forEach(id => {
-    ;(playbook[id] ?? []).forEach(item => {
-      unique.set(item.id, item)
-    })
-  })
-  return [...unique.values()]
-})
+  const unique = new Map();
+  selectedSymptoms.value.forEach((id) => {
+    (playbook[id] ?? []).forEach((item) => {
+      unique.set(item.id, item);
+    });
+  });
+  return [...unique.values()];
+});
 </script>
 
 <template>

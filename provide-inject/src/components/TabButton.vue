@@ -1,17 +1,17 @@
 <script setup>
-import { inject, computed } from 'vue'
-import { TABS_CONTEXT_KEY } from '../keys'
+import { inject, computed } from "vue";
+import { TABS_CONTEXT_KEY } from "../keys";
 
 const props = defineProps({
   index: {
     type: Number,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
-const { activeTab } = inject(TABS_CONTEXT_KEY)
+const { activeTab } = inject(TABS_CONTEXT_KEY);
 
-const isActive = computed(() => activeTab.value === props.index)
+const isActive = computed(() => activeTab.value === props.index);
 </script>
 
 <template>

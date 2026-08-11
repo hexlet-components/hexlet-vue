@@ -1,9 +1,9 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const open = ref(true)
+const open = ref(true);
 function toggle() {
-  open.value = !open.value
+  open.value = !open.value;
 }
 </script>
 
@@ -12,7 +12,7 @@ function toggle() {
     <div class="bg-gray-50 p-4 border-b">
       <slot name="toggle" :open="open" :toggle="toggle">
         <button class="px-3 py-1 border rounded" @click="toggle">
-          {{ open ? 'Скрыть' : 'Показать' }}
+          {{ open ? "Скрыть" : "Показать" }}
         </button>
       </slot>
     </div>
