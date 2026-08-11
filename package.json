@@ -15,18 +15,25 @@
     "optimization"
   ],
   "scripts": {
-    "dev:async": "npm run dev -w @tsenturion-vue/async",
-    "dev:virtual-dom": "npm run dev -w @tsenturion-vue/virtual-dom",
-    "dev:template-ref": "npm run dev -w @tsenturion-vue/template-ref",
-    "dev:slots": "npm run dev -w @tsenturion-vue/slots",
-    "dev:provide-inject": "npm run dev -w @tsenturion-vue/provide-inject",
-    "dev:pinia": "npm run dev -w @tsenturion-vue/pinia",
-    "dev:router": "npm run dev -w @tsenturion-vue/router",
-    "dev:optimization": "npm run dev -w @tsenturion-vue/optimization",
-    "build": "npm run build --workspaces --if-present",
-    "preview": "npm run preview --workspaces --if-present"
+    "dev:async": "pnpm --filter @tsenturion-vue/async run dev",
+    "dev:virtual-dom": "pnpm --filter @tsenturion-vue/virtual-dom run dev",
+    "dev:template-ref": "pnpm --filter @tsenturion-vue/template-ref run dev",
+    "dev:slots": "pnpm --filter @tsenturion-vue/slots run dev",
+    "dev:provide-inject": "pnpm --filter @tsenturion-vue/provide-inject run dev",
+    "dev:pinia": "pnpm --filter @tsenturion-vue/pinia run dev",
+    "dev:router": "pnpm --filter @tsenturion-vue/router run dev",
+    "dev:optimization": "pnpm --filter @tsenturion-vue/optimization run dev",
+    "build": "pnpm -r run build",
+    "preview": "pnpm -r run preview",
+    "lint": "oxlint --config=.oxlintrc.json .",
+    "lint:fix": "oxfmt --ignore-path=.oxfmtignore . && oxlint --config=.oxlintrc.json --fix .",
+    "format": "oxfmt --ignore-path=.oxfmtignore .",
+    "format:check": "oxfmt --ignore-path=.oxfmtignore --check ."
   },
   "devDependencies": {
-    "npm-check-updates": "^21.0.2"
-  }
+    "npm-check-updates": "^21.0.2",
+    "oxfmt": "^0.63.0",
+    "oxlint": "^1.78.0"
+  },
+  "packageManager": "pnpm@11.20.0"
 }

@@ -1,7 +1,7 @@
 .PHONY: install build
 
 install:
-	npm ci
+	pnpm install --frozen-lockfile
 
 build:
-	npm run build
+	pnpm run build
