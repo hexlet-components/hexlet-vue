@@ -16,24 +16,24 @@ Examples repository for Vue lessons used in Hexlet courses.
 
 ## Included demo projects
 
-* `async`
-* `virtual-dom`
-* `template-ref`
-* `slots`
-* `provide-inject`
-* `pinia`
-* `router`
-* `optimization`
+- `async`
+- `virtual-dom`
+- `template-ref`
+- `slots`
+- `provide-inject`
+- `pinia`
+- `router`
+- `optimization`
 
 ## How to contribute
 
-* Discuss the project on [Telegram Hexlet](https://t.me/hexletcommunity/12)
+- Discuss the project on [Telegram Hexlet](https://t.me/hexletcommunity/12)
 
 ## Requirements
 
-* Node.js >= 22
-* npm >= 10
-* make >= 4 (optional)
+- Node.js >= 22
+- npm >= 10
+- make >= 4 (optional)
 
 ## Setup
 

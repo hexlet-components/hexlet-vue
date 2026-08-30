@@ -1,6 +1,7 @@
 # vue-slots-demo
 
 Интерактивный мини-урок по слотам Vue 3:
+
 - Default slots (fallback)
 - Named slots
 - Scoped slots
@@ -11,3 +12,4 @@
 ```bash
 npm install
 npm run dev
+```
