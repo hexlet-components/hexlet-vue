@@ -26,9 +26,9 @@
     "build": "pnpm -r run build",
     "preview": "pnpm -r run preview",
     "lint": "oxlint .",
-    "lint:fix": "oxfmt --ignore-path=.oxfmtignore . && oxlint --fix .",
-    "format": "oxfmt --ignore-path=.oxfmtignore .",
-    "format:check": "oxfmt --ignore-path=.oxfmtignore --check ."
+    "lint:fix": "oxfmt . && oxlint --fix .",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check ."
   },
   "devDependencies": {
     "npm-check-updates": "^23.1.0",
