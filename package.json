@@ -25,8 +25,8 @@
     "dev:optimization": "pnpm --filter @tsenturion-vue/optimization run dev",
     "build": "pnpm -r run build",
     "preview": "pnpm -r run preview",
-    "lint": "oxlint --config=.oxlintrc.json .",
-    "lint:fix": "oxfmt --ignore-path=.oxfmtignore . && oxlint --config=.oxlintrc.json --fix .",
+    "lint": "oxlint .",
+    "lint:fix": "oxfmt --ignore-path=.oxfmtignore . && oxlint --fix .",
     "format": "oxfmt --ignore-path=.oxfmtignore .",
     "format:check": "oxfmt --ignore-path=.oxfmtignore --check ."
   },
